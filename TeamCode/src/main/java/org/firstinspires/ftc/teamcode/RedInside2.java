@@ -119,8 +119,8 @@ public class BlueInside extends LinearOpMode {
         encoderStrafe(DRIVE_SPEED,  -12,  12, 5.0);  // S1: Strafe 12 Inches with 5 Sec timeout
         //Delivery
         encoderDrive(DRIVE_SPEED, -12, -12, 4.0);  // S3: Drive backward 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED,  12,  -12, 5.0);  // S1: Turn right with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   36, 36, 4.0);  // S2: Drive forward 12 Inches with 4 Sec timeout
+        encoderDrive(TURN_SPEED,  12,  -12, 5.0);  // S1: Turn right with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,   36, 36, 4.0);  // S2: Drive forward 36 Inches with 4 Sec timeout
         //Park(Warehouse)
 /*
         robot.shooterMotor.setPower(-0.5);
