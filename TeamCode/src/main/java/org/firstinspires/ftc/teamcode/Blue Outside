@@ -19,8 +19,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  *
  *   The desired path in this example is:
  *   - Drive forward for 19 inches
- *   - Spin right for 12 Inches
+ *   - Spin right for 12 inches
  *   - Drive Backwards for 23 inches
+ *   - Spin left for 12 inches
+ *   - Drive forward for 19 inches
+ *   - Spin right for 12 inches
+ *   - Drive forward for 36 inches
+ *   - Spin left for 12 inches
+ *   - Drive Backwards for 28 inches
  *   - Stop and close the claw.
  *
  *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
