@@ -18,9 +18,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  *  power command moves them forwards, and causes the encoders to count UP.
  *
  *   The desired path in this example is:
- *   - Drive forward for 48 inches
+ *   - Drive forward for 18 inches
  *   - Spin right for 12 Inches
- *   - Drive Backwards for 24 inches
+ *   - Drive Backwards for 23 inches
  *   - Stop and close the claw.
  *
  *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
