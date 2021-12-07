@@ -110,7 +110,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         }
         robot.liftMotor.setPower(0);
 */
-                encoderDrive(DRIVE_SPEED, 3, 3, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
+                // Drive forward from wall to ducks
+                encoderDrive(DRIVE_SPEED, 3, 3, 4.0);
+                //Scan location 1
+                if (color.red() >20 )
+
                 encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
 
                 encoderDrive(DRIVE_SPEED, 56, 56, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
