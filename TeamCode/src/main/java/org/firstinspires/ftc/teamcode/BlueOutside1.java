@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
                     (WHEEL_DIAMETER_INCHES * 3.1415);
             static final double DRIVE_SPEED = 0.5;
             static final double TURN_SPEED = 0.5;
-
+            public double duckLevel = 3;
             @Override
             public void runOpMode() {
 
@@ -113,7 +113,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
                 // Drive forward from wall to ducks
                 encoderDrive(DRIVE_SPEED, 3, 3, 4.0);
                 //Scan location 1
-                if (color.red() >20 )
+                if (color.red()-color.blue()>20 ) //Then the duck is at location 1
+                    duckLevel = 1
 
                 encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
 
