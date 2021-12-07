@@ -18,10 +18,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  *  power command moves them forwards, and causes the encoders to count UP.
  *
  *   The desired path in this example is:
- *   - Drive forward for 48 inches
+ *   - Drive forward for 19 inches
  *   - Spin right for 12 Inches
- *   - Drive Backwards for 24 inches
+ *   - Drive Backwards for 23 inches
  *   - Stop and close the claw.
+ *   - Drive forward for 47 inches
  *
  *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
  *  that performs the actual movement.
@@ -33,9 +34,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Red Inside 2", group="Autonomous")
+@Autonomous(name="Blue Outside 2", group="Autonomous")
 //@Disabled
-public class RedInside2 extends LinearOpMode {
+public class BlueOutside2 extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -69,8 +70,8 @@ public class RedInside2 extends LinearOpMode {
         robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-       // robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -101,27 +102,23 @@ public class RedInside2 extends LinearOpMode {
         robot.liftMotor.setTargetPosition(-6650);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.liftMotor.setPower(.75);
-
         while (opModeIsActive() && robot.liftMotor.isBusy() ) {
-
             // Display it for the driver.
             telemetry.addData("Path1",  "Running to %7d", -6650);
             telemetry.addData("Path2",  "Running at %7d",
                     robot.liftMotor.getCurrentPosition());
             telemetry.update();
         }
-
         robot.liftMotor.setPower(0);
-
 */
-        encoderDrive(DRIVE_SPEED, 12, 12, 4.0);  // S3: Drive forward 12 Inches with 4 Sec timeout\
-        //scan
-        encoderStrafe(DRIVE_SPEED,  -12,  12, 5.0);  // S1: Strafe 12 Inches with 5 Sec timeout
-        //Delivery
-        encoderDrive(DRIVE_SPEED, -12, -12, 4.0);  // S3: Drive backward 12 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  12,  -12, 5.0);  // S1: Turn right with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   36, 36, 4.0);  // S2: Drive forward 36 Inches with 4 Sec timeout
-        //Park(Warehouse)
+        encoderDrive(DRIVE_SPEED, 3, 3, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
+        encoderStrafe(DRIVE_SPEED,  24,  -24, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
+
+        encoderDrive(DRIVE_SPEED, 56, 56, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
+        encoderStrafe(DRIVE_SPEED,  -22,  22, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
+        encoderDrive(TURN_SPEED,   14.5, -14.5, 4.0);  // S2: Turn Left 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 12, 12, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
+
 /*
         robot.shooterMotor.setPower(-0.5);
         sleep(750);

@@ -117,7 +117,7 @@ public class MSJHardware {
             frontLeftMotor.setPower(0);
             backRightMotor.setPower(0);
             backLeftMotor.setPower(0);
-            /*
+         /*
             shooterMotor.setPower(0);
             liftMotor.setPower(0);
             intakeMotor.setPower(0);

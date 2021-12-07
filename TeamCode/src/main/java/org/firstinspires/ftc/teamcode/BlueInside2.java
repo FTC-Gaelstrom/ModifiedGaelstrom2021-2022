@@ -33,9 +33,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Blue Outside", group="Autonomous")
+@Autonomous(name="Blue Inside 2", group="Autonomous")
 //@Disabled
-public class BlueOutside extends LinearOpMode {
+public class BlueInside2 extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -69,8 +69,8 @@ public class BlueOutside extends LinearOpMode {
         robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-       // robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -101,14 +101,18 @@ public class BlueOutside extends LinearOpMode {
         robot.liftMotor.setTargetPosition(-6650);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.liftMotor.setPower(.75);
+
         while (opModeIsActive() && robot.liftMotor.isBusy() ) {
+
             // Display it for the driver.
             telemetry.addData("Path1",  "Running to %7d", -6650);
             telemetry.addData("Path2",  "Running at %7d",
                     robot.liftMotor.getCurrentPosition());
             telemetry.update();
         }
+
         robot.liftMotor.setPower(0);
+
 */
         encoderDrive(DRIVE_SPEED, 3, 3, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
         encoderStrafe(DRIVE_SPEED,  24,  -24, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout

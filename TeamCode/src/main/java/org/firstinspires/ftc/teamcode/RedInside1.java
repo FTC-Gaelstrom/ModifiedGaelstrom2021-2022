@@ -33,9 +33,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="BlueInside", group="Autonomous")
+@Autonomous(name="Red Inside 1", group="Autonomous")
 //@Disabled
-public class BlueInside extends LinearOpMode {
+public class RedInside1 extends LinearOpMode {
 
     /* Declare OpMode members. */
 
