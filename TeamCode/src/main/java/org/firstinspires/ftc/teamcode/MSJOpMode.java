@@ -86,7 +86,7 @@ public class MSJOpMode extends LinearOpMode {
             double frontLeftPower;
             double backRightPower;
             double backLeftPower;
-          //  double liftPower;
+
            // double armPower;
 
 
@@ -181,16 +181,19 @@ public class MSJOpMode extends LinearOpMode {
 
             */
 
-/*
+
             if(gamepad2.right_bumper){
                 robot.intakeMotor.setPower(0.5);
+            }
+            if(gamepad2.a){
+                robot.intakeMotor.setPower(1.0);
             }
 
             if(gamepad2.left_bumper){
                 robot.intakeMotor.setPower(0.0);
             }
 
-
+/*
             if(gamepad2.y){
                 robot.loaderServo.setPower(-0.5);
             }
