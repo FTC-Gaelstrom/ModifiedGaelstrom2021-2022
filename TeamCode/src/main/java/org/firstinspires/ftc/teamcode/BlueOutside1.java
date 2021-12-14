@@ -54,6 +54,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
             static final double DRIVE_SPEED = 0.5;
             static final double TURN_SPEED = 0.5;
             public double duckLevel = 3;
+            public double sHubDistance = 3.0;
             @Override
             public void runOpMode() {
 
@@ -110,18 +111,43 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         }
         robot.liftMotor.setPower(0);
 */
-                // Drive forward from wall to ducks
-                encoderDrive(DRIVE_SPEED, 3, 3, 4.0);
+                // Drive forwards to get off wall
+                encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
+                //Strafe right to carousel
+                encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);
+                //Spin carousel
+                sleep(5000)
+                //Drive forwards to be in line with barcodes
+                encoderDrive(DRIVE_SPEED, 5, 5, 4.0);
+                //Strafe left to location 1
+                encoderStrafe(DRIVE_SPEED, -12, 12, 5.0);
                 //Scan location 1
-                if (color.red()-color.blue()>20 ) //Then the duck is at location 1
-                    duckLevel = 1
+                if (color.red()-color.blue()>20 ) {// If there is yellow present at location 1
+                    duckLevel = 1 //Then the duck is at location 1
+                    sHubDistance = 27;
+                }
+                else {
+                    //Strafe left to location 2
+                    encoderStrafe(DRIVE_SPEED, -3, 3, 5.0);
+                    if (color.red() - color.blue() > 20) {// If there is yellow present at location 2
+                        duckLevel = 2 //Then the duck is at location 2
+                        sHubDistance = 15;
+                    }
 
-                encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
+                }
 
-                encoderDrive(DRIVE_SPEED, 56, 56, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
-                encoderStrafe(DRIVE_SPEED, -22, 22, 5.0);  // S1: Strafe 24 Inches with 5 Sec timeout
-                encoderDrive(TURN_SPEED, 14.5, -14.5, 4.0);  // S2: Turn Left 12 Inches with 4 Sec timeout
-                encoderDrive(DRIVE_SPEED, 12, 12, 4.0);  // S3: Drive forward 24 Inches with 4 Sec timeout
+                //Strafe left to shipping hub
+                encoderStrafe(DRIVE_SPEED, -sHubDistance, sHubDistance, 5.0);
+                //Lift to correct level
+                sleep(5000)
+                //Strafe right to storage hub (to park)
+                encoderStrafe(DRIVE_SPEED,48, -48, 5.0);
+
+
+
+
+
+
 
 /*
         robot.shooterMotor.setPower(-0.5);
