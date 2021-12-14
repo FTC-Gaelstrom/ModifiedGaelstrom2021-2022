@@ -4,9 +4,15 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 
 public class MSJHardware {
 
@@ -16,6 +22,7 @@ public class MSJHardware {
         public DcMotor backRightMotor = null;
         public DcMotor backLeftMotor = null;
 
+        public SensorColor colorSensor;
 
         //Create Shooter Motor
     /*    public DcMotor shooterMotor = null;
@@ -68,7 +75,7 @@ public class MSJHardware {
             intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 
           //  armMotor = hwMap.get(DcMotor.class, "armMotor");
-
+            colorSensor = hwMap.get(SensorColor.class, "sensor_color");
 
 
             //Set Up Motor Direction

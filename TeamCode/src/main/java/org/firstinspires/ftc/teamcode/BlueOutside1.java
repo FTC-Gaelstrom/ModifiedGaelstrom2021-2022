@@ -1,11 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.View;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
         /**
@@ -37,7 +45,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
          */
 
         @Autonomous(name="Blue Outside 1", group="Autonomous")
-//@Disabled
+        @Disabled
         public class BlueOutside1 extends LinearOpMode {
 
             /* Declare OpMode members. */
@@ -55,7 +63,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
             static final double TURN_SPEED = 0.5;
             public double duckLevel = 3;
             public double sHubDistance = 3.0;
-            @Override
+          //  @Override
+          NormalizedColorSensor colorSensor;
             public void runOpMode() {
 
                 /*
@@ -116,30 +125,31 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
                 //Strafe right to carousel
                 encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);
                 //Spin carousel
-                sleep(5000)
+                sleep(5000);
                 //Drive forwards to be in line with barcodes
                 encoderDrive(DRIVE_SPEED, 5, 5, 4.0);
                 //Strafe left to location 1
                 encoderStrafe(DRIVE_SPEED, -12, 12, 5.0);
                 //Scan location 1
+                /*
                 if (color.red()-color.blue()>20 ) {// If there is yellow present at location 1
-                    duckLevel = 1 //Then the duck is at location 1
+                    duckLevel = 1; //Then the duck is at location 1
                     sHubDistance = 27;
                 }
                 else {
                     //Strafe left to location 2
                     encoderStrafe(DRIVE_SPEED, -3, 3, 5.0);
                     if (color.red() - color.blue() > 20) {// If there is yellow present at location 2
-                        duckLevel = 2 //Then the duck is at location 2
+                        duckLevel = 2; //Then the duck is at location 2
                         sHubDistance = 15;
                     }
 
                 }
-
+*/
                 //Strafe left to shipping hub
                 encoderStrafe(DRIVE_SPEED, -sHubDistance, sHubDistance, 5.0);
                 //Lift to correct level
-                sleep(5000)
+                sleep(5000);
                 //Strafe right to storage hub (to park)
                 encoderStrafe(DRIVE_SPEED,48, -48, 5.0);
 
@@ -342,8 +352,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
                     robot.backRightMotor.setTargetPosition(newRightTarget);
                     //testing computer at school
                 }
-            }
-        }
 
+            }
+
+        }
 
 
