@@ -75,14 +75,14 @@ public class MSJHardware {
             intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 
            armMotor = hwMap.get(DcMotor.class, "armMotor");
-          //  colorSensor = hwMap.get(SensorColor.class, "sensor_color");
+            colorSensor = hwMap.get(SensorColor.class, "sensor_color");
 
 
             //Set Up Motor Direction
             frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            backRightMotor.setDirection(DcMotor.Direction.REVERSE);
-            backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+            backRightMotor.setDirection(DcMotor.Direction.FORWARD);
+            backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
 /*
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
 
