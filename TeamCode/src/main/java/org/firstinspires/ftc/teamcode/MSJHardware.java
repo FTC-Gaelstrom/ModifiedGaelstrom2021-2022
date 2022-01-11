@@ -22,7 +22,7 @@ public class MSJHardware {
         public DcMotor backRightMotor = null;
         public DcMotor backLeftMotor = null;
 
-        public SensorColor colorSensor;
+     //   public SensorColor colorSensor;
 
         //Create Shooter Motor
     /*    public DcMotor shooterMotor = null;
@@ -75,14 +75,14 @@ public class MSJHardware {
             intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 
            armMotor = hwMap.get(DcMotor.class, "armMotor");
-            colorSensor = hwMap.get(SensorColor.class, "sensor_color");
+        //    colorSensor = hwMap.get(SensorColor.class, "sensor_color");
 
 
             //Set Up Motor Direction
             frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-            backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-            backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+            backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+            backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
 /*
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
 
@@ -91,7 +91,7 @@ public class MSJHardware {
 */
           armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-            intakeMotor.setDirection(DcMotor.Direction.REVERSE);
+            intakeMotor.setDirection(DcMotor.Direction.FORWARD);
             //Set Motor Mode  (For now we will run it without an encoder, but when we do stop_and_reset_encoder for each motor and then run_using_encoder for each motor)
             // We should be using encoders b/c running based off time is not reliable b/c it depends on charge of battery and the power the motors are receiving
             frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
