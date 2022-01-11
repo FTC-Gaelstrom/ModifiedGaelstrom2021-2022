@@ -39,7 +39,7 @@ public class MSJHardware {
         public DcMotor intakeMotor = null;
 
         //Arm motor
-     //   public DcMotor armMotor = null;
+     public DcMotor armMotor = null;
 
         //Additional Variables
         HardwareMap hwMap = null;
@@ -74,7 +74,7 @@ public class MSJHardware {
             //Connect intake Motors
             intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 
-          //  armMotor = hwMap.get(DcMotor.class, "armMotor");
+           armMotor = hwMap.get(DcMotor.class, "armMotor");
             colorSensor = hwMap.get(SensorColor.class, "sensor_color");
 
 
@@ -88,9 +88,9 @@ public class MSJHardware {
 
             liftMotor.setDirection(DcMotor.Direction.REVERSE);
 
-
-            armMotor.setDirection(DcMotor.Direction.REVERSE);
 */
+          armMotor.setDirection(DcMotor.Direction.REVERSE);
+
             intakeMotor.setDirection(DcMotor.Direction.REVERSE);
             //Set Motor Mode  (For now we will run it without an encoder, but when we do stop_and_reset_encoder for each motor and then run_using_encoder for each motor)
             // We should be using encoders b/c running based off time is not reliable b/c it depends on charge of battery and the power the motors are receiving
@@ -102,10 +102,10 @@ public class MSJHardware {
             liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //  liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-
-            armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
 */
+            armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
             intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //Set ZERO POWER BEHAVIOR for Drive Train as BRAKE so that the motors stop turning
             frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -115,13 +115,13 @@ public class MSJHardware {
 /*
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
+*/
              armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
             //Set ZERO POWER BEHAVIOR for Shooters as FREESPIN so that the motor continue to spin freely
-            shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-*/
+//            shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             //Set Motors to use no power
             frontRightMotor.setPower(0);
@@ -131,10 +131,10 @@ public class MSJHardware {
          /*
             shooterMotor.setPower(0);
             liftMotor.setPower(0);
-
+*/
             armMotor.setPower(0);
 
-*/
+
             intakeMotor.setPower(0);
     }
 }
