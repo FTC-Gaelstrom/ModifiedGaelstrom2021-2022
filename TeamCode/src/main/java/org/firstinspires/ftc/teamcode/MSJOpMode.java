@@ -182,18 +182,43 @@ public class MSJOpMode extends LinearOpMode {
             */
 
 
-            if(gamepad2.right_bumper){
+            if(gamepad2.x){
                 robot.intakeMotor.setPower(0.5);
             }
-            if(gamepad2.a){
+            if(gamepad2.y){
                 robot.intakeMotor.setPower(1.0);
             }
 
-            if(gamepad2.left_bumper){
+            if(gamepad2.a){
                 robot.intakeMotor.setPower(0.0);
             }
 
-/*
+            if(gamepad2.right_bumper) {
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setTargetPosition(30);
+                robot.armMotor.setPower(0.25);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                }
+                robot.armMotor.setPower(0);
+            }
+
+            if(gamepad2.left_bumper) {
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setTargetPosition(0);
+                robot.armMotor.setPower(-0.25);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                }
+                robot.armMotor.setPower(0);
+
+            }
+
+            /*
             if(gamepad2.y){
                 robot.loaderServo.setPower(-0.5);
             }
@@ -211,10 +236,10 @@ public class MSJOpMode extends LinearOpMode {
             // Send calculated power to wheels
           //  robot.shooterMotor.setPower(shootPower);
 
-           // robot.frontRightMotor.setPower(frontRightPower);
-           // robot.frontLeftMotor.setPower(frontLeftPower);
-           // robot.backRightMotor.setPower(backRightPower);
-           // robot.backLeftMotor.setPower(backLeftPower);
+            robot.frontRightMotor.setPower(frontRightPower);
+            robot.frontLeftMotor.setPower(frontLeftPower);
+            robot.backRightMotor.setPower(backRightPower);
+            robot.backLeftMotor.setPower(backLeftPower);
 
            // robot.liftMotor.setPower(liftPower);
 
@@ -226,10 +251,10 @@ public class MSJOpMode extends LinearOpMode {
            // telemetry.addData("Shooter Motor", "shoot (%.2f)", shootPower);
            // telemetry.addData("Lift Motor", "lift (%.2f)", liftPower);
            // telemetry.addData("encoder-liftmotor",robot.liftMotor.getCurrentPosition());
-            telemetry.addData("Front Right Motor", "frontRightMotor", y);
-            telemetry.addData("Front Left Motor", "frontLeftMotor", x);
-            telemetry.addData("Back Right Motor", "frontLeftMotor", rx);
-            telemetry.addData("Front Left Motor", "backLeftMotor", backLeftPower);
+            telemetry.addData("Front Right Motor", "frontRightMotor", frontRightPower);
+            telemetry.addData("Front Left Motor", "frontLeftMotor", frontLeftPower);
+            telemetry.addData("Back Right Motor", "backRightMotor", backRightPower);
+            telemetry.addData("Back Left Motor", "backLeftMotor", backLeftPower);
         //    telemetry.addData("Claw:",robot.clawServo.getPosition());
             telemetry.update();
         }
