@@ -109,7 +109,10 @@ public class MSJOpMode extends LinearOpMode {
                 x*=0.25;
                 rx*=0.25;
             }
-/*
+
+            /*
+
+
             if(gamepad2.dpad_up){
                 robot.clawServo.setPosition(0);
             }
@@ -194,8 +197,10 @@ public class MSJOpMode extends LinearOpMode {
             }
 
             if(gamepad2.right_bumper) {
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(1000);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setTargetPosition(30);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
@@ -203,19 +208,23 @@ public class MSJOpMode extends LinearOpMode {
                     idle();
                 }
                 robot.armMotor.setPower(0);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             }
 
             if(gamepad2.left_bumper) {
+                robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(1000);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setTargetPosition(0);
-                robot.armMotor.setPower(-0.25);
+                robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
                     telemetry.update();
                     idle();
                 }
                 robot.armMotor.setPower(0);
-
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
             }
 
             /*
