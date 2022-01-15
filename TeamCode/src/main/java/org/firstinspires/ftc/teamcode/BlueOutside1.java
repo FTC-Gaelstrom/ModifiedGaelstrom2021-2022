@@ -125,31 +125,63 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Strafe right to carousel
                 encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);
                 //Spin carousel
-                sleep(5000);
+                robot.spinnerMotor.setPower(.5);
+                sleep(4000);
+                robot.spinnerMotor.setPower(0);
                 //Drive forwards to be in line with barcodes
                 encoderDrive(DRIVE_SPEED, 5, 5, 4.0);
                 //Strafe left to location 1
                 encoderStrafe(DRIVE_SPEED, -12, 12, 5.0);
                 //Scan location 1
-                /*
-                if (color.red()-color.blue()>20 ) {// If there is yellow present at location 1
+
+                if (robot.colorSensor.red()>robot.colorSensor.blue()) {// If there is yellow present at location 1
                     duckLevel = 1; //Then the duck is at location 1
                     sHubDistance = 27;
                 }
                 else {
                     //Strafe left to location 2
                     encoderStrafe(DRIVE_SPEED, -3, 3, 5.0);
-                    if (color.red() - color.blue() > 20) {// If there is yellow present at location 2
+                    if (robot.colorSensor.red() > robot.colorSensor.blue()) {// If there is yellow present at location 2
                         duckLevel = 2; //Then the duck is at location 2
                         sHubDistance = 15;
                     }
 
                 }
-*/
+
                 //Strafe left to shipping hub
                 encoderStrafe(DRIVE_SPEED, -sHubDistance, sHubDistance, 5.0);
-                //Lift to correct level
-                sleep(5000);
+                //Back away correct distance from shipping hub
+
+                //Lift
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(0.25);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                }
+                robot.armMotor.setPower(0);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+                //Put down arm
+                robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(0.25);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                }
+                robot.armMotor.setPower(0);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+
                 //Strafe right to storage hub (to park)
                 encoderStrafe(DRIVE_SPEED,48, -48, 5.0);
 

@@ -227,6 +227,14 @@ public class MSJOpMode extends LinearOpMode {
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
             }
 
+            if(gamepad2.dpad_up) {
+                robot.spinnerMotor.setPower(.5);
+            }
+
+            if(gamepad2.dpad_down) {
+                robot.spinnerMotor.setPower(-.5);
+            }
+
             /*
             if(gamepad2.y){
                 robot.loaderServo.setPower(-0.5);

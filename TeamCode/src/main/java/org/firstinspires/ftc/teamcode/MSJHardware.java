@@ -23,6 +23,8 @@ public class MSJHardware {
         public DcMotor backRightMotor = null;
         public DcMotor backLeftMotor = null;
 
+        public DcMotor spinnerMotor = null;
+
         public ColorSensor colorSensor;
 
         //Create Shooter Motor
@@ -62,6 +64,8 @@ public class MSJHardware {
             backRightMotor = hwMap.get(DcMotor.class,"backRightMotor");
             backLeftMotor = hwMap.get(DcMotor.class,"backLeftMotor");
 
+            spinnerMotor = hwMap.get(DcMotor.class, "spinnerMotor");
+
        /*     //Connect Shooter Motor
             shooterMotor = hwMap.get(DcMotor.class,"shooterMotor");
 
@@ -84,6 +88,8 @@ public class MSJHardware {
             frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
             backRightMotor.setDirection(DcMotor.Direction.REVERSE);
             backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+
+            spinnerMotor.setDirection(DcMotor.Direction.FORWARD);
 /*
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
 
@@ -99,6 +105,8 @@ public class MSJHardware {
             frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+            spinnerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 /*
             liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //  liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -113,6 +121,9 @@ public class MSJHardware {
             frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            spinnerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 /*
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -129,6 +140,9 @@ public class MSJHardware {
             frontLeftMotor.setPower(0);
             backRightMotor.setPower(0);
             backLeftMotor.setPower(0);
+
+            spinnerMotor.setPower(0);
+
          /*
             shooterMotor.setPower(0);
             liftMotor.setPower(0);
