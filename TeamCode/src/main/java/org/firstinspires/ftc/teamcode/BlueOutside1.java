@@ -77,6 +77,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 telemetry.addData("Status", "Resetting Encoders");    //
                 telemetry.update();
 
+                telemetry.addData("Red:", "%7d",robot.colorSensor.red());
+                telemetry.addData("Blue:", "%7d",robot.colorSensor.blue());
+                telemetry.addData("Green:", "%7d",robot.colorSensor.green());
+
                 robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -105,8 +109,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
                 // Step through each leg of the path,
                 // Note: Reverse movement is obtained by setting a negative distance (not speed)
-
-                sleep(3000);
 /*
         robot.liftMotor.setTargetPosition(-6650);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -122,36 +124,47 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 */
                 // Drive forwards to get off wall
                 encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
+                //drop intake system
+                robot.dropperServo.setPosition(.77);
                 //Strafe right to carousel
-                encoderStrafe((DRIVE_SPEED - .25), 12, -12, 5.0);
+                encoderStrafe((DRIVE_SPEED - .25), 6, -6, 5.0);
                 //turn towards carousel
-                encoderDrive(TURN_SPEED, -6, 6, 5);
+                encoderDrive(TURN_SPEED, -9, 9, 5);
+                //drive back into carousel
+                encoderDrive(DRIVE_SPEED, -2, -2, 5);
                 //Spin carousel
-                robot.spinnerMotor.setPower(.5);
-                sleep(4000);
+                robot.spinnerMotor.setPower(.75);
+                sleep(2000);
                 robot.spinnerMotor.setPower(0);
-                //Drive forwards to be in line with barcodes
-                encoderDrive(DRIVE_SPEED, 5, 5, 4.0);
-                //Strafe left to location 1
-                encoderStrafe(DRIVE_SPEED, -12, 12, 5.0);
+                //Strafe right to location 1
+                encoderStrafe(DRIVE_SPEED, 10, -10, 5.0);
+                //drive forward to duck
+                encoderDrive((DRIVE_SPEED-.25), 3,3,5);
                 //Scan location 1
-
+                sleep(1500);
                 if (robot.colorSensor.red()>robot.colorSensor.blue()) {// If there is yellow present at location 1
                     duckLevel = 1; //Then the duck is at location 1
-                    sHubDistance = 27;
+                    sHubDistance = 29;
                 }
                 else {
-                    //Strafe left to location 2
-                    encoderStrafe(DRIVE_SPEED, -3, 3, 5.0);
+                    //Drive forward to location 2
+                    encoderDrive((DRIVE_SPEED-.25), 3, 3, 5.0);
+                    sleep(1500);
                     if (robot.colorSensor.red() > robot.colorSensor.blue()) {// If there is yellow present at location 2
                         duckLevel = 2; //Then the duck is at location 2
-                        sHubDistance = 15;
+                        sHubDistance = 17;
                     }
 
                 }
 
-                //Strafe left to shipping hub
-                encoderStrafe(DRIVE_SPEED, -sHubDistance, sHubDistance, 5.0);
+                //back away from the duck
+                encoderDrive(DRIVE_SPEED, -2,-2,5);
+                //Strafe away from duck
+                encoderStrafe(DRIVE_SPEED, -6, 6, 5.0);
+                //drive paralell to the shub
+                encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
+                //turn towards the shub
+                encoderDrive(TURN_SPEED, 4.5,-4.5,5);
                 //Back away correct distance from shipping hub
 
                 //Lift

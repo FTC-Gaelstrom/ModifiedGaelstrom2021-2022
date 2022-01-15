@@ -26,6 +26,8 @@ public class MSJHardware {
         public DcMotor spinnerMotor = null;
 
         public ColorSensor colorSensor;
+        public Servo dropperServo = null;
+
 
         //Create Shooter Motor
     /*    public DcMotor shooterMotor = null;
@@ -65,6 +67,7 @@ public class MSJHardware {
             backLeftMotor = hwMap.get(DcMotor.class,"backLeftMotor");
 
             spinnerMotor = hwMap.get(DcMotor.class, "spinnerMotor");
+            dropperServo = hwMap.get(Servo.class,"dropperServo");
 
        /*     //Connect Shooter Motor
             shooterMotor = hwMap.get(DcMotor.class,"shooterMotor");
@@ -72,7 +75,7 @@ public class MSJHardware {
             //Connect Lift Motor
             liftMotor = hwMap.get(DcMotor.class,"liftMotor");
             //Connect Servos
-            dropperServo = hwMap.get(Servo.class,"dropperServo");
+
             loaderServo = hwMap.get(CRServo.class, "loaderServo");
             clawServo = hwMap.get(Servo.class,"clawServo");
 */
@@ -151,5 +154,7 @@ public class MSJHardware {
 
 
             intakeMotor.setPower(0);
+
+            dropperServo.setPosition(0.3);
     }
 }
