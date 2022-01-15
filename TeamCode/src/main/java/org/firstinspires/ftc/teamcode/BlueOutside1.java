@@ -45,7 +45,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
          */
 
         @Autonomous(name="Blue Outside 1", group="Autonomous")
-        @Disabled
+       //   @Disabled
         public class BlueOutside1 extends LinearOpMode {
 
             /* Declare OpMode members. */
