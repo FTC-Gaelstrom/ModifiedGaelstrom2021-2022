@@ -60,7 +60,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
             static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                     (WHEEL_DIAMETER_INCHES * 3.1415);
             static final double DRIVE_SPEED = 0.5;
-            static final double TURN_SPEED = 0.5;
+            static final double TURN_SPEED = 0.25;
             public double duckLevel = 3;
             public double sHubDistance = 3.0;
           //  @Override
@@ -123,7 +123,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 // Drive forwards to get off wall
                 encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
                 //Strafe right to carousel
-                encoderStrafe(DRIVE_SPEED, 24, -24, 5.0);
+                encoderStrafe((DRIVE_SPEED - .25), 12, -12, 5.0);
+                //turn towards carousel
+                encoderDrive(TURN_SPEED, -6, 6, 5);
                 //Spin carousel
                 robot.spinnerMotor.setPower(.5);
                 sleep(4000);
