@@ -78,7 +78,7 @@ public class MSJOpMode extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-           // robot.dropperServo.setPosition(.1);
+            robot.dropperServo.setPosition(.74);
 
             // Setup a variable for each drive wheel to save power level for telemetry
           //  double shootPower;
@@ -199,7 +199,7 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad2.right_bumper) {
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setTargetPosition(750);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -214,7 +214,7 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad2.left_bumper) {
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setTargetPosition(800);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {

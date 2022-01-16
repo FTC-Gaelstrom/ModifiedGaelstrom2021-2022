@@ -77,9 +77,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 telemetry.addData("Status", "Resetting Encoders");    //
                 telemetry.update();
 
-                telemetry.addData("Red:", "%7d",robot.colorSensor.red());
-                telemetry.addData("Blue:", "%7d",robot.colorSensor.blue());
-                telemetry.addData("Green:", "%7d",robot.colorSensor.green());
+                telemetry.addData("Red:", robot.colorSensor.red());
+                telemetry.addData("Blue:", robot.colorSensor.blue());
+                telemetry.addData("Green:",robot.colorSensor.green());
 
                 robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -125,7 +125,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 // Drive forwards to get off wall
                 encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
                 //drop intake system
-                robot.dropperServo.setPosition(.77);
+                robot.dropperServo.setPosition(.74);
                 //Strafe right to carousel
                 encoderStrafe((DRIVE_SPEED - .25), 6, -6, 5.0);
                 //turn towards carousel
@@ -170,7 +170,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Lift
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setTargetPosition(750);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -185,7 +185,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Put down arm
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(1000);
+                robot.armMotor.setTargetPosition(800);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
