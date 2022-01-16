@@ -197,8 +197,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-                //Strafe right to storage hub (to park)
-                encoderStrafe(DRIVE_SPEED,48, -48, 5.0);
+                //Turn towards storage unit (to park)
+                encoderStrafe(TURN_SPEED, -4.5, 4.5, 5);
+                //Drive to park
+                encoderDrive(DRIVE_SPEED,-29,29,5);
+                //Strafe at end?
 
 
 
