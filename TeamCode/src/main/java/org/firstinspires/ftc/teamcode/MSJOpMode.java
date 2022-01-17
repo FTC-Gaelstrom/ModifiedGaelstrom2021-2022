@@ -78,6 +78,10 @@ public class MSJOpMode extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
+            telemetry.addData("Red:", robot.colorSensor.red());
+            telemetry.addData("Blue:", robot.colorSensor.blue());
+            telemetry.addData("Green:",robot.colorSensor.green());
+
             robot.dropperServo.setPosition(.74);
 
             // Setup a variable for each drive wheel to save power level for telemetry
