@@ -159,7 +159,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
                 //back away from the duck
                 encoderDrive(DRIVE_SPEED, -2,-2,5);
-                //Strafe away from duck
+                //Strafe left away from duck
                 encoderStrafe(DRIVE_SPEED, -6, 6, 5.0);
                 //drive paralell to the shub
                 encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);

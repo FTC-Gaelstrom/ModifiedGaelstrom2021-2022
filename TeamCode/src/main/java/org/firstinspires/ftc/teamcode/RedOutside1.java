@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -34,9 +33,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="BlueInside1", group="Autonomous")
+@Autonomous(name="RedOutside1", group="Autonomous")
 //@Disabled
-public class BlueInside1 extends LinearOpMode {
+public class RedOutside1 extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -116,18 +115,29 @@ public class BlueInside1 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
-        //Strafe right to carousel
-        encoderStrafe((DRIVE_SPEED - .25), 6, -6, 5.0);
+        //Strafe left to carousel
+
+
+
+        //adjust strafe distance below
+        encoderStrafe((DRIVE_SPEED - .25), -6, 6, 5.0);
+
+
+
+        /*
         //turn towards carousel
         encoderDrive(TURN_SPEED, -9, 9, 5);
         //drive back into carousel
         encoderDrive(DRIVE_SPEED, -2, -2, 5);
+         */
         //Spin carousel
         robot.spinnerMotor.setPower(.75);
         sleep(2000);
         robot.spinnerMotor.setPower(0);
-        //Strafe right to location 1
-        encoderStrafe(DRIVE_SPEED, 10, -10, 5.0);
+        //Drive forward to location 1
+        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);
+        //Turn towards duck
+        encoderDrive(TURN_SPEED, 9,-9,5);
         //drive forward to duck
         encoderDrive((DRIVE_SPEED-.25), 3,3,5);
         //Scan location 1
@@ -149,12 +159,12 @@ public class BlueInside1 extends LinearOpMode {
 
         //back away from the duck
         encoderDrive(DRIVE_SPEED, -2,-2,5);
-        //Strafe away from duck
-        encoderStrafe(DRIVE_SPEED, -6, 6, 5.0);
+        //Strafe right away from duck
+        encoderStrafe(DRIVE_SPEED, 6, -6, 5.0);
         //drive paralell to the shub
         encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
         //turn towards the shub
-        encoderDrive(TURN_SPEED, 4.5,-4.5,5);
+        encoderDrive(TURN_SPEED, -4.5,4.5,5);
         //Back away correct distance from shipping hub
 
         //Lift
@@ -188,9 +198,9 @@ public class BlueInside1 extends LinearOpMode {
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
         //Turn towards storage unit (to park)
-        encoderStrafe(TURN_SPEED, -4.5, 4.5, 5);
+        encoderStrafe(TURN_SPEED, 4.5, -4.5, 5);
         //Drive to park
-        encoderDrive(DRIVE_SPEED,-29,29,5);
+        encoderDrive(DRIVE_SPEED,-29,-29,5);
         //Strafe at end?
 
 
