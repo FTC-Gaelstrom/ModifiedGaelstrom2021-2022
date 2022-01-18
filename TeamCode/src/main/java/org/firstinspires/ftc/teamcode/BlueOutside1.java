@@ -62,7 +62,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
             static final double DRIVE_SPEED = 0.5;
             static final double TURN_SPEED = 0.25;
             public double duckLevel = 3;
-            public double sHubDistance = 3.0;
+            public double sHubDistance = 15;
           //  @Override
           NormalizedColorSensor colorSensor;
             public void runOpMode() {
@@ -131,20 +131,20 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //turn towards carousel
                 encoderDrive(TURN_SPEED, -9, 9, 5);
                 //drive back into carousel
-                encoderDrive(DRIVE_SPEED, -2, -2, 5);
+                encoderDrive(DRIVE_SPEED, -1.5, -1.5, 5);
                 //Spin carousel
                 robot.spinnerMotor.setPower(.75);
                 sleep(2000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1
-                encoderStrafe(DRIVE_SPEED, 10, -10, 5.0);
+                encoderStrafe((DRIVE_SPEED -.25), 9.85, -9.85, 5.0);
                 //drive forward to duck
-                encoderDrive((DRIVE_SPEED-.25), 2,2,5);
+                encoderDrive((DRIVE_SPEED-.25), 1.35,1.35,5);
                 //Scan location 1
                 sleep(1500);
-                if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 1
+                if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>20) {// If there is yellow present at location 1
                     duckLevel = 1; //Then the duck is at location 1
-                    sHubDistance = 29;
+                    sHubDistance = 22;
                 }
                 else {
                     //Drive forward to location 2
@@ -164,9 +164,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //drive paralell to the shub
                 encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
                 //turn towards the shub
-                encoderDrive(TURN_SPEED, 4.5,-4.5,5);
+                encoderDrive(TURN_SPEED, 9,-9,5);
                 //Back away correct distance from shipping hub
-
+                encoderDrive((DRIVE_SPEED -.25), -2.5, -2.5, 5  );
                 //Lift
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
