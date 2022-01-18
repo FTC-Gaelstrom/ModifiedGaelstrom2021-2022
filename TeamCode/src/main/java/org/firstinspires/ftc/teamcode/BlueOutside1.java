@@ -139,7 +139,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Strafe right to location 1
                 encoderStrafe(DRIVE_SPEED, 10, -10, 5.0);
                 //drive forward to duck
-                encoderDrive((DRIVE_SPEED-.25), 3,3,5);
+                encoderDrive((DRIVE_SPEED-.25), 2,2,5);
                 //Scan location 1
                 sleep(1500);
                 if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 1
@@ -148,7 +148,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 }
                 else {
                     //Drive forward to location 2
-                    encoderDrive((DRIVE_SPEED-.25), 3, 3, 5.0);
+                    encoderDrive((DRIVE_SPEED-.25), 2, 2, 5.0);
                     sleep(1500);
                     if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 2
                         duckLevel = 2; //Then the duck is at location 2
