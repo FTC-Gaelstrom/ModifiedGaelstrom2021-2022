@@ -77,9 +77,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 telemetry.addData("Status", "Resetting Encoders");    //
                 telemetry.update();
 
-                telemetry.addData("Red:", robot.colorSensor.red());
-                telemetry.addData("Blue:", robot.colorSensor.blue());
-                telemetry.addData("Green:",robot.colorSensor.green());
+
 
                 robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -109,7 +107,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
                 // Step through each leg of the path,
                 // Note: Reverse movement is obtained by setting a negative distance (not speed)
-/*
+
+
+    telemetry.addData("Red:", robot.colorSensor.red());
+                telemetry.addData("Blue:", robot.colorSensor.blue());
+                telemetry.addData("Green:",robot.colorSensor.green());
+
+                /*
         robot.liftMotor.setTargetPosition(-6650);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.liftMotor.setPower(.75);
@@ -170,9 +174,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Lift
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(750);
+                robot.armMotor.setTargetPosition(600);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.25);
+                robot.armMotor.setPower(0.15);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
                     telemetry.update();
@@ -185,9 +189,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Put down arm
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(800);
+                robot.armMotor.setTargetPosition(620);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.25);
+                robot.armMotor.setPower(0.15);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
                     telemetry.update();
@@ -198,9 +202,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
                 //Turn towards storage unit (to park)
-                encoderStrafe(TURN_SPEED, -4.5, 4.5, 5);
+                encoderDrive(TURN_SPEED, 9, -9, 5);
                 //Drive to park
-                encoderDrive(DRIVE_SPEED,-29,29,5);
+                encoderDrive(DRIVE_SPEED,15,15,5);
                 //Strafe at end?
 
 
