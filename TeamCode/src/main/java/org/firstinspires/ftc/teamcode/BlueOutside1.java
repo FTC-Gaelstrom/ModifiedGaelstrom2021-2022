@@ -141,10 +141,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 sleep(2000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1
-                encoderStrafe((DRIVE_SPEED -.25), 9.85, -9.85, 5.0);
+                encoderStrafe((DRIVE_SPEED -.25), 9.75, -9.75, 5.0);
                 //drive forward to duck
                 encoderDrive((DRIVE_SPEED-.25), 1.35,1.35,5);
                 //Scan location 1
+                telemetry.addData("Red:", robot.colorSensor.red());
+                telemetry.addData("Blue:", robot.colorSensor.blue());
+                telemetry.addData("Green:",robot.colorSensor.green());
                 sleep(1500);
                 if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>20) {// If there is yellow present at location 1
                     duckLevel = 1; //Then the duck is at location 1
@@ -152,7 +155,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 }
                 else {
                     //Drive forward to location 2
-                    encoderDrive((DRIVE_SPEED-.25), 2, 2, 5.0);
+                    telemetry.addData("Red:", robot.colorSensor.red());
+                    telemetry.addData("Blue:", robot.colorSensor.blue());
+                    telemetry.addData("Green:",robot.colorSensor.green());
+                    encoderDrive((DRIVE_SPEED-.25), 4, 4, 5.0);
                     sleep(1500);
                     if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 2
                         duckLevel = 2; //Then the duck is at location 2
@@ -169,8 +175,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
                 //turn towards the shub
                 encoderDrive(TURN_SPEED, 9,-9,5);
-                //Back away correct distance from shipping hub
-                encoderDrive((DRIVE_SPEED -.25), -2.5, -2.5, 5  );
+                //Drive forward correct distance from shipping hub
+                encoderDrive((DRIVE_SPEED -.25), 5-duckLevel, 5-duckLevel, 5  );
                 //Lift
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -185,11 +191,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 robot.armMotor.setPower(0);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+                sleep(500);
 
                 //Put down arm
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(620);
+                robot.armMotor.setTargetPosition(615);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.15);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -202,9 +209,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
                 //Turn towards storage unit (to park)
-                encoderDrive(TURN_SPEED, 9, -9, 5);
+                encoderDrive(TURN_SPEED, 7, -7, 5);
                 //Drive to park
-                encoderDrive(DRIVE_SPEED,15,15,5);
+                encoderDrive(DRIVE_SPEED,16,16,5);
                 //Strafe at end?
 
 
