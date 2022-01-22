@@ -50,8 +50,8 @@ public class RedOutside1 extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.25;
-    public double duckLevel = 3;
-    public double sHubDistance = 3.0;
+    public double duckDistance = 3;
+    public double sHubDistance = 15;
     //  @Override
     NormalizedColorSensor colorSensor;
     public void runOpMode() {
@@ -120,38 +120,43 @@ public class RedOutside1 extends LinearOpMode {
 
 
         //adjust strafe distance below
-        encoderStrafe((DRIVE_SPEED - .25), -6, 6, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -7.5, 7.5, 5.0);
 
 
 
-        /*
-        //turn towards carousel
-        encoderDrive(TURN_SPEED, -9, 9, 5);
-        //drive back into carousel
-        encoderDrive(DRIVE_SPEED, -2, -2, 5);
-         */
+
+
+
         //Spin carousel
-        robot.spinnerMotor.setPower(.75);
+        robot.spinnerMotor.setPower(- .75);
         sleep(2000);
         robot.spinnerMotor.setPower(0);
-        //Drive forward to location 1
-        encoderDrive(DRIVE_SPEED, 10, 10, 5.0);
-        //Turn towards duck
-        encoderDrive(TURN_SPEED, 9,-9,5);
+        //drive
+        encoderDrive((DRIVE_SPEED - .25), 5.82, 5.82, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -3, 3, 5.0);
+        encoderDrive((DRIVE_SPEED - .25), 4, 4, 5.0);
+        //turn towards duck
+        encoderDrive(TURN_SPEED, 9.5, -9.5, 5);
         //drive forward to duck
-        encoderDrive((DRIVE_SPEED-.25), 3,3,5);
+        encoderDrive((DRIVE_SPEED-.25), 2,2,5);
         //Scan location 1
+        telemetry.addData("Red:", robot.colorSensor.red());
+        telemetry.addData("Blue:", robot.colorSensor.blue());
+        telemetry.addData("Green:",robot.colorSensor.green());
         sleep(1500);
-        if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 1
-            duckLevel = 1; //Then the duck is at location 1
-            sHubDistance = 29;
+        if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
+            duckDistance = 2; //Then the duck is at location 1
+            sHubDistance = 22;
         }
         else {
             //Drive forward to location 2
             encoderDrive((DRIVE_SPEED-.25), 3, 3, 5.0);
+            telemetry.addData("Red:", robot.colorSensor.red());
+            telemetry.addData("Blue:", robot.colorSensor.blue());
+            telemetry.addData("Green:",robot.colorSensor.green());
             sleep(1500);
-            if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 2
-                duckLevel = 2; //Then the duck is at location 2
+            if (robot.colorSensor.red()>15 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>15) {// If there is yellow present at location 2
+                duckDistance = 2.5; //Then the duck is at location 2
                 sHubDistance = 17;
             }
 
@@ -160,7 +165,7 @@ public class RedOutside1 extends LinearOpMode {
         //back away from the duck
         encoderDrive(DRIVE_SPEED, -2,-2,5);
         //Strafe right away from duck
-        encoderStrafe(DRIVE_SPEED, 6, -6, 5.0);
+        encoderStrafe(DRIVE_SPEED, 7, -7, 5.0);
         //drive paralell to the shub
         encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
         //turn towards the shub
