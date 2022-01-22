@@ -120,7 +120,7 @@ public class RedOutside1 extends LinearOpMode {
 
 
         //adjust strafe distance below
-        encoderStrafe((DRIVE_SPEED - .25), -7.5, 7.5, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -7.9, 7.9, 5.0);
 
 
 
@@ -165,13 +165,13 @@ public class RedOutside1 extends LinearOpMode {
         //back away from the duck
         encoderDrive(DRIVE_SPEED, -2,-2,5);
         //Strafe right away from duck
-        encoderStrafe(DRIVE_SPEED, 7, -7, 5.0);
+        encoderStrafe(DRIVE_SPEED, 8, -8, 5.0);
         //drive paralell to the shub
         encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
         //turn towards the shub
-        encoderDrive(TURN_SPEED, -4.5,4.5,5);
+        encoderDrive(TURN_SPEED, -9.5,9.5,5);
         //Back away correct distance from shipping hub
-
+        encoderDrive(DRIVE_SPEED, - 2, - 2, 5.0);
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
