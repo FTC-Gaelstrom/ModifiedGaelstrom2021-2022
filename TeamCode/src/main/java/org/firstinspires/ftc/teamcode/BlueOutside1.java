@@ -150,7 +150,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 telemetry.addData("Green:",robot.colorSensor.green());
                 sleep(1500);
                 if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
-                    duckDistance = 2; //Then the duck is at location 1
+                    duckDistance = 3.5; //Then the duck is at location 1
                     sHubDistance = 22;
                 }
                 else {
