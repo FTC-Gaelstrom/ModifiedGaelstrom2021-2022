@@ -150,7 +150,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 telemetry.addData("Green:",robot.colorSensor.green());
                 sleep(1500);
                 if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
-                    duckDistance = 3.5; //Then the duck is at location 1
+                    duckDistance = 4.55; //Then the duck is at location 1
                     sHubDistance = 22;
                 }
                 else {
@@ -213,7 +213,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Turn towards storage unit (to park)
                 encoderDrive(TURN_SPEED, 9, -9, 5);
                 //Drive to park
-                encoderDrive((DRIVE_SPEED-.25),21.5,21.5,5);
+                encoderDrive((DRIVE_SPEED-.175),21.5,21.5,5);
+                //strafe at end
+                encoderStrafe(DRIVE_SPEED, 4,-4,5);
 
 
 
