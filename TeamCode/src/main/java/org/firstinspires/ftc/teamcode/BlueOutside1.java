@@ -141,9 +141,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 sleep(2000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1
-                encoderStrafe((DRIVE_SPEED -.25), 9.82, -9.82, 5.0);
+                encoderStrafe((DRIVE_SPEED -.25), 9.87, -9.87, 5.0);
                 //drive forward to duck
-                encoderDrive((DRIVE_SPEED-.25), 1.4,1.4,5);
+                encoderDrive((DRIVE_SPEED-.25), 1.5,1.5,5);
                 //Scan location 1
                 telemetry.addData("Red:", robot.colorSensor.red());
                 telemetry.addData("Blue:", robot.colorSensor.blue());
@@ -213,9 +213,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Turn towards storage unit (to park)
                 encoderDrive(TURN_SPEED, 9, -9, 5);
                 //Drive to park
-                encoderDrive(DRIVE_SPEED,23,23,5);
-                //Strafe at end
-                encoderStrafe(DRIVE_SPEED,-6,6,5);
+                encoderDrive((DRIVE_SPEED-.25),21.5,21.5,5);
 
 
 
