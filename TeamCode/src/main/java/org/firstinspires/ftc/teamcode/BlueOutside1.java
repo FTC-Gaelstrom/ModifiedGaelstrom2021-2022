@@ -61,8 +61,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                     (WHEEL_DIAMETER_INCHES * 3.1415);
             static final double DRIVE_SPEED = 0.5;
             static final double TURN_SPEED = 0.25;
-            public double duckDistance = 3;
-            public double sHubDistance = 15;
+            public double duckDistance = 6.75;
+            public double sHubDistance = 9;
           //  @Override
           NormalizedColorSensor colorSensor;
             public void runOpMode() {
@@ -135,23 +135,23 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //turn towards carousel
                 encoderDrive(TURN_SPEED, -9, 9, 5);
                 //drive back into carousel
-                encoderDrive(DRIVE_SPEED, -1.5, -1.5, 5);
+                encoderDrive(DRIVE_SPEED, -1.75, -1.75, 5);
                 //Spin carousel
                 robot.spinnerMotor.setPower(.75);
                 sleep(2000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1
-                encoderStrafe((DRIVE_SPEED -.25), 9.87, -9.87, 5.0);
+                encoderStrafe((DRIVE_SPEED -.25), 11, -11, 5.0);
                 //drive forward to duck
-                encoderDrive((DRIVE_SPEED-.25), 1.5,1.5,5);
+                encoderDrive((DRIVE_SPEED-.25), 1.7,1.8,5);
                 //Scan location 1
                 telemetry.addData("Red:", robot.colorSensor.red());
                 telemetry.addData("Blue:", robot.colorSensor.blue());
                 telemetry.addData("Green:",robot.colorSensor.green());
-                sleep(1500);
+                sleep(750);
                 if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
-                    duckDistance = 4.7; //Then the duck is at location 1
-                    sHubDistance = 22;
+                    duckDistance = 4.625; //Then the duck is at location 1
+                    sHubDistance = 17;
                 }
                 else {
                     //Drive forward to location 2
@@ -159,30 +159,32 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                     telemetry.addData("Blue:", robot.colorSensor.blue());
                     telemetry.addData("Green:",robot.colorSensor.green());
                     encoderDrive((DRIVE_SPEED-.25), 4, 4, 5.0);
-                    sleep(1500);
+                    sleep(750);
                     if (robot.colorSensor.red()>15 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>15) {// If there is yellow present at location 2
-                        duckDistance = 2.5; //Then the duck is at location 2
-                        sHubDistance = 17;
+                        duckDistance = 6; //Then the duck is at location 2
+                        sHubDistance = 13;
                     }
 
                 }
 
                 //back away from the duck
-                encoderDrive(DRIVE_SPEED, -2,-2,5);
+                encoderDrive(DRIVE_SPEED, -1,-1,5);
                 //Strafe left away from duck
                 encoderStrafe(DRIVE_SPEED, -7, 7, 5.0);
+                //turn a little bit to be parallel
+                encoderDrive(TURN_SPEED,-0.5,0.5,5);
                 //drive paralell to the shub
                 encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
                 //turn towards the shub
-                encoderDrive(TURN_SPEED, 9,-9,5);
+                encoderDrive(TURN_SPEED, 7,-7,5);
                 //Drive forward correct distance from shipping hub
                 encoderDrive((DRIVE_SPEED -.25), 6-duckDistance, 6-duckDistance, 5  );
                 //Lift
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(600);
+                robot.armMotor.setTargetPosition(700);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.15);
+                robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
                     telemetry.update();
@@ -196,9 +198,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Put down arm
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(605);
+                robot.armMotor.setTargetPosition(703);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.15);
+                robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
                     telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
                     telemetry.update();
@@ -211,11 +213,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //Back away from sHub
                 encoderDrive(DRIVE_SPEED-.2,-3,-3,5);
                 //Turn towards storage unit (to park)
-                encoderDrive(TURN_SPEED, 9, -9, 5);
+                encoderDrive(TURN_SPEED, 11, -11, 5);
                 //Drive to park
-                encoderDrive((DRIVE_SPEED-.175),21.5,21.5,5);
+                encoderDrive((DRIVE_SPEED),17.75,17.75,5);
                 //strafe at end
-                encoderStrafe(DRIVE_SPEED, 4,-4,5);
+                encoderStrafe(DRIVE_SPEED+.2,-8,8,5);
 
 
 
@@ -317,10 +319,18 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                     }
 
                     // Stop all motion;
+                    robot.frontLeftMotor.setPower(0.5);
+                    robot.frontRightMotor.setPower(0.5);
+                    robot.backLeftMotor.setPower(0.5);
+                    robot.backRightMotor.setPower(0.5);
+
+                    sleep(100);
+
                     robot.frontLeftMotor.setPower(0);
                     robot.frontRightMotor.setPower(0);
                     robot.backLeftMotor.setPower(0);
                     robot.backRightMotor.setPower(0);
+
 
                     // Turn off RUN_TO_POSITION
                     robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
