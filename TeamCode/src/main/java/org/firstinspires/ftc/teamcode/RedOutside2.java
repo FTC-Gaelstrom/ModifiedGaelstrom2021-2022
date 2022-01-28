@@ -50,8 +50,8 @@ public class RedOutside2 extends LinearOpMode {
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.25;
-    public double duckLevel = 3;
-    public double sHubDistance = 3.0;
+    public double duckDistance = 3;
+    public double sHubDistance = 19;
     //  @Override
     NormalizedColorSensor colorSensor;
     public void runOpMode() {
@@ -115,47 +115,33 @@ public class RedOutside2 extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
-        //Strafe right to carousel
-        encoderStrafe((DRIVE_SPEED - .25), 6, -6, 5.0);
-        //turn towards carousel
-        encoderDrive(TURN_SPEED, -9, 9, 5);
-        //drive back into carousel
-        encoderDrive(DRIVE_SPEED, -2, -2, 5);
+        //Strafe left to carousel
+
+
+
+        //adjust strafe distance below
+        encoderStrafe((DRIVE_SPEED - .25), -8.2, 8.2, 5.0);
+
+
+
+
+
+
         //Spin carousel
-        robot.spinnerMotor.setPower(.75);
-        sleep(2000);
+        robot.spinnerMotor.setPower(- .6);
+        sleep(2200);
         robot.spinnerMotor.setPower(0);
-        //Strafe right to location 1
-        encoderStrafe(DRIVE_SPEED, 10, -10, 5.0);
-        //drive forward to duck
-        encoderDrive((DRIVE_SPEED-.25), 3,3,5);
-        //Scan location 1
-        sleep(1500);
-        if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 1
-            duckLevel = 1; //Then the duck is at location 1
-            sHubDistance = 29;
-        }
-        else {
-            //Drive forward to location 2
-            encoderDrive((DRIVE_SPEED-.25), 3, 3, 5.0);
-            sleep(1500);
-            if (robot.colorSensor.red()>20 && robot.colorSensor.blue()>20 && robot.colorSensor.green()>30) {// If there is yellow present at location 2
-                duckLevel = 2; //Then the duck is at location 2
-                sHubDistance = 17;
-            }
-
-        }
-
-        //back away from the duck
-        encoderDrive(DRIVE_SPEED, -2,-2,5);
-        //Strafe away from duck
-        encoderStrafe(DRIVE_SPEED, -6, 6, 5.0);
-        //drive paralell to the shub
+        //drive
+        encoderDrive((DRIVE_SPEED - .25), 5.7, 5.7, 5.0);
+        //turn towards duck
+        encoderDrive(TURN_SPEED, 9.7, -9.7, 5);
+        // drive parallel to shipping hub
         encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
         //turn towards the shub
-        encoderDrive(TURN_SPEED, 4.5,-4.5,5);
-        //Back away correct distance from shipping hub
-
+        encoderDrive(TURN_SPEED, -9.5,9.5,5);
+        /*Back away correct distance from shipping hub
+        encoderDrive(DRIVE_SPEED, - 2, - 2, 5.0);
+         */
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -174,7 +160,7 @@ public class RedOutside2 extends LinearOpMode {
         //Put down arm
         robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.armMotor.setTargetPosition(800);
+        robot.armMotor.setTargetPosition(755);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armMotor.setPower(0.25);
         while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -186,12 +172,14 @@ public class RedOutside2 extends LinearOpMode {
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        //Turn towards storage unit (to park)
-        encoderStrafe(TURN_SPEED, -4.5, 4.5, 5);
+        //turn away from shub
+        encoderDrive(TURN_SPEED,-9,9,5);
         //Drive to park
-        encoderDrive(DRIVE_SPEED,-29,29,5);
-        //Strafe at end?
-
+        encoderDrive(DRIVE_SPEED,21,21,5);
+        //Strafe right
+        encoderStrafe(DRIVE_SPEED,5,-5,5);
+        // drive forward
+        encoderDrive(DRIVE_SPEED, 1.5, 1.5, 5);
 
 
 

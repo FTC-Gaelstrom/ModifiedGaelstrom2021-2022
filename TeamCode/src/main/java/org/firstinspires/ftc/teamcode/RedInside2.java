@@ -96,7 +96,6 @@ public class RedInside2 extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        sleep(3000);
 /*
         robot.liftMotor.setTargetPosition(-6650);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -114,14 +113,49 @@ public class RedInside2 extends LinearOpMode {
         robot.liftMotor.setPower(0);
 
 */
-        encoderDrive(DRIVE_SPEED, 12, 12, 4.0);  // S3: Drive forward 12 Inches with 4 Sec timeout\
-        //scan
-        encoderStrafe(DRIVE_SPEED,  -12,  12, 5.0);  // S1: Strafe 12 Inches with 5 Sec timeout
-        //Delivery
-        encoderDrive(DRIVE_SPEED, -12, -12, 4.0);  // S3: Drive backward 12 Inches with 4 Sec timeout
-        encoderDrive(TURN_SPEED,  12,  -12, 5.0);  // S1: Turn right with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED,   36, 36, 4.0);  // S2: Drive forward 36 Inches with 4 Sec timeout
-        //Park(Warehouse)
+        // Drive forwards to get off wall
+        encoderDrive((DRIVE_SPEED-.25), 7.5, 7.5, 4.0);
+        //drop intake system
+        robot.dropperServo.setPosition(.74);
+        //strafe to shub
+        encoderStrafe((DRIVE_SPEED-.25),-12,12,5);
+        //Lift
+        robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+        robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.armMotor.setTargetPosition(700);
+        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.armMotor.setPower(0.25);
+        while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+            telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+        robot.armMotor.setPower(0);
+        robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        sleep(500);
+
+        //Put down arm
+        robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
+        robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.armMotor.setTargetPosition(703);
+        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.armMotor.setPower(0.25);
+        while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+            telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+            telemetry.update();
+            idle();
+        }
+        robot.armMotor.setPower(0);
+        robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+        //turn towards warehouse
+        encoderDrive((TURN_SPEED-.25),9,-9,5);
+        //drive into warehouse
+        encoderDrive(DRIVE_SPEED,32,32,5);
+        //do 360
+        encoderDrive((TURN_SPEED-.25),19,-19,5);
+
 /*
         robot.shooterMotor.setPower(-0.5);
         sleep(750);

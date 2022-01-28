@@ -120,7 +120,7 @@ public class RedOutside1 extends LinearOpMode {
 
 
         //adjust strafe distance below
-        encoderStrafe((DRIVE_SPEED - .25), -7.9, 7.9, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -8.2, 8.2, 5.0);
 
 
 
@@ -128,15 +128,15 @@ public class RedOutside1 extends LinearOpMode {
 
 
         //Spin carousel
-        robot.spinnerMotor.setPower(- .75);
-        sleep(2000);
+        robot.spinnerMotor.setPower(- .6);
+        sleep(2200);
         robot.spinnerMotor.setPower(0);
         //drive
         encoderDrive((DRIVE_SPEED - .25), 5.82, 5.82, 5.0);
-        encoderStrafe((DRIVE_SPEED - .25), -3, 3, 5.0);
-        encoderDrive((DRIVE_SPEED - .25), 4, 4, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -4, 4, 5.0);
+        encoderDrive((DRIVE_SPEED - .25), 4.7, 4.7, 5.0);
         //turn towards duck
-        encoderDrive(TURN_SPEED, 9.5, -9.5, 5);
+        encoderDrive(TURN_SPEED, 9.7, -9.7, 5);
         //drive forward to duck
         encoderDrive((DRIVE_SPEED-.25), 2,2,5);
         //Scan location 1
@@ -190,7 +190,7 @@ public class RedOutside1 extends LinearOpMode {
         //Put down arm
         robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.armMotor.setTargetPosition(800);
+        robot.armMotor.setTargetPosition(755);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armMotor.setPower(0.25);
         while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -202,12 +202,12 @@ public class RedOutside1 extends LinearOpMode {
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        //Turn towards storage unit (to park)
-        encoderStrafe(TURN_SPEED, 4.5, -4.5, 5);
+        //turn away from shub
+        encoderDrive(TURN_SPEED,-9,9,5);
         //Drive to park
-        encoderDrive(DRIVE_SPEED,-29,-29,5);
-        //Strafe at end?
-
+        encoderDrive(DRIVE_SPEED,21,21,5);
+        //Strafe right
+        encoderStrafe(DRIVE_SPEED,5,-5,5);
 
 
 
