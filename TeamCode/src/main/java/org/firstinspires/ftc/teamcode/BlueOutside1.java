@@ -137,7 +137,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //drive back into carousel
                 encoderDrive(DRIVE_SPEED, -1.75, -1.75, 5);
                 //Spin carousel
-                robot.spinnerMotor.setPower(.75);
+                robot.spinnerMotor.setPower(.3);
                 sleep(2000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1

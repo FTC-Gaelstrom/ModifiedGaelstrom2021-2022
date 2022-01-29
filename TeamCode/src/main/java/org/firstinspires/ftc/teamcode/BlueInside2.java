@@ -152,7 +152,7 @@ public class BlueInside2 extends LinearOpMode {
         //turn towards warehouse
         encoderDrive((TURN_SPEED-.25),-9,9,5);
         //drive into warehouse
-        encoderDrive(DRIVE_SPEED,32,32,5);
+        encoderDrive(DRIVE_SPEED,34,34,5);
         //do 360
         encoderDrive((TURN_SPEED-.25),-19,19,5);
 

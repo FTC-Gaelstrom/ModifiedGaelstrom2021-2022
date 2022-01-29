@@ -127,7 +127,7 @@ public class BlueOutside2 extends LinearOpMode {
                         //drive back into carousel
                         encoderDrive(DRIVE_SPEED, -1.8, -1.8, 5);
                         //Spin carousel
-                        robot.spinnerMotor.setPower(.75);
+                        robot.spinnerMotor.setPower(.3);
                         sleep(2000);
                         robot.spinnerMotor.setPower(0);
                         //Drive towards sHub parallel to barcodes

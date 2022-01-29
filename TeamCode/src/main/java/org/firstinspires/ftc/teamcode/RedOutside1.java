@@ -128,7 +128,7 @@ public class RedOutside1 extends LinearOpMode {
 
 
         //Spin carousel
-        robot.spinnerMotor.setPower(- .6);
+        robot.spinnerMotor.setPower(- .3);
         sleep(2200);
         robot.spinnerMotor.setPower(0);
         //drive
