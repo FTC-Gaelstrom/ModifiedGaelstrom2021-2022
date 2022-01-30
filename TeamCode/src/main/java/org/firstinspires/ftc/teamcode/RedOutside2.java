@@ -120,7 +120,7 @@ public class RedOutside2 extends LinearOpMode {
 
 
         //adjust strafe distance below
-        encoderStrafe((DRIVE_SPEED - .25), -8.2, 8.2, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -8.4, 8.4, 5.0);
 
 
 
@@ -128,8 +128,8 @@ public class RedOutside2 extends LinearOpMode {
 
 
         //Spin carousel
-        robot.spinnerMotor.setPower(- .3);
-        sleep(2200);
+        robot.spinnerMotor.setPower(- .28);
+        sleep(3000);
         robot.spinnerMotor.setPower(0);
         //drive
         encoderDrive((DRIVE_SPEED - .25), 5.7, 5.7, 5.0);
