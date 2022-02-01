@@ -130,12 +130,10 @@ public class BlueOutside2 extends LinearOpMode {
                         robot.spinnerMotor.setPower(.3);
                         sleep(2000);
                         robot.spinnerMotor.setPower(0);
-                        //Drive towards sHub parallel to barcodes
-                        encoderDrive(DRIVE_SPEED-.25,20.5,20.5,5);
-                        //Turn towards sHub
-                        encoderDrive(TURN_SPEED,9,-9,5);
+                        //Strafe right towards sHub
+                        encoderStrafe(DRIVE_SPEED,16,-16,5);
                         //Drive directly at sHub
-                        encoderDrive(DRIVE_SPEED-.25,4.5,4.5,5);
+                        encoderDrive(DRIVE_SPEED-.25,18,18,5);
                         //Lift arm
                     robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                     robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -167,17 +165,10 @@ public class BlueOutside2 extends LinearOpMode {
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-
                 //Back away from sHub
-                encoderDrive(DRIVE_SPEED-.2,-3,-3,5);
-                //Turn towards storage unit (to park)
-                encoderDrive(TURN_SPEED, 9, -9, 5);
-                //Drive to park
-                encoderDrive((DRIVE_SPEED),21,21,5);
+                encoderDrive(DRIVE_SPEED-.2,-18,-18,5);
                 //strafe at end
-                encoderStrafe(DRIVE_SPEED+.2,-11,11,5);
-                //drive forward
-                encoderDrive((DRIVE_SPEED -.25), 1.5, 1.5, 5);
+                encoderStrafe(DRIVE_SPEED,-6,6,5);
 
                         /*
                         //Strafe right to location 1

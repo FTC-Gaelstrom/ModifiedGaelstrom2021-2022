@@ -114,11 +114,13 @@ public class BlueInside2 extends LinearOpMode {
 
 */
         // Drive forwards to get off wall
-        encoderDrive((DRIVE_SPEED-.25), 7.5, 7.5, 4.0);
+        encoderDrive((DRIVE_SPEED-.25), 20, 20, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
-        //strafe to shub
-        encoderStrafe((DRIVE_SPEED-.25),12,-12,5);
+        //turn towards sHub
+        encoderDrive(TURN_SPEED,9,-9,5);
+        //drive forward to meet sHub
+        encoderDrive(DRIVE_SPEED,4,4,5);
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -149,12 +151,13 @@ public class BlueInside2 extends LinearOpMode {
         robot.armMotor.setPower(0);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
-        //turn towards warehouse
-        encoderDrive((TURN_SPEED-.25),-9,9,5);
-        //drive into warehouse
-        encoderDrive(DRIVE_SPEED,34,34,5);
-        //do 360
-        encoderDrive((TURN_SPEED-.25),-19,19,5);
+
+        //back away from the sHub
+        encoderDrive(DRIVE_SPEED,-4,-4,5);
+        //strafe left towards cargo
+        encoderStrafe(DRIVE_SPEED,-12,12,5);
+        //back into cargo
+        encoderDrive(DRIVE_SPEED,16,16,5);
 
 /*
         robot.shooterMotor.setPower(-0.5);

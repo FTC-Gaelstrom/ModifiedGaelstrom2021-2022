@@ -132,16 +132,13 @@ public class RedOutside2 extends LinearOpMode {
         sleep(3000);
         robot.spinnerMotor.setPower(0);
         //drive
-        encoderDrive((DRIVE_SPEED - .25), 5.7, 5.7, 5.0);
+        encoderDrive((DRIVE_SPEED - .25), 22, 22, 5.0);
         //turn towards duck
         encoderDrive(TURN_SPEED, 9.7, -9.7, 5);
         // drive parallel to shipping hub
-        encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
+        encoderDrive(DRIVE_SPEED, 20, 20, 5);
         //turn towards the shub
-        encoderDrive(TURN_SPEED, -9.5,9.5,5);
-        /*Back away correct distance from shipping hub
-        encoderDrive(DRIVE_SPEED, - 2, - 2, 5.0);
-         */
+
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -172,14 +169,13 @@ public class RedOutside2 extends LinearOpMode {
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        //turn away from shub
-        encoderDrive(TURN_SPEED,-9,9,5);
+
         //Drive to park
-        encoderDrive(DRIVE_SPEED,21,21,5);
+        encoderDrive(DRIVE_SPEED,-20,-20,5);
         //Strafe right
-        encoderStrafe(DRIVE_SPEED,5,-5,5);
-        // drive forward
-        encoderDrive(DRIVE_SPEED, 1.5, 1.5, 5);
+        encoderStrafe(DRIVE_SPEED,6,-6,5);
+
+
 
 
 
