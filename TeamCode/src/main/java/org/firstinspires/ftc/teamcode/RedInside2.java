@@ -114,13 +114,11 @@ public class RedInside2 extends LinearOpMode {
 
 */
         // Drive forwards to get off wall
-        encoderDrive((DRIVE_SPEED-.25), 24, 24, 4.0);
+        encoderDrive((DRIVE_SPEED-.25), 18, 18, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
         //turn to shub
-        encoderDrive((TURN_SPEED-.25),-9,9,5);
-        // drive forward to shub
-        encoderDrive((DRIVE_SPEED -.25), 4, 4, 5);
+        encoderDrive((TURN_SPEED-.25),-9.5,9.5,5);
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -151,12 +149,10 @@ public class RedInside2 extends LinearOpMode {
         robot.armMotor.setPower(0);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
-        //turn towards warehouse
-        encoderDrive((DRIVE_SPEED-.25),-4,-4,5);
         //drive into warehouse
         encoderStrafe((DRIVE_SPEED-.25),-12,12,5);
-        //do 360
-        encoderDrive(DRIVE_SPEED,-16,-16,5);
+        //drive backwards into warehouse
+        encoderDrive(DRIVE_SPEED,-18,-18,5);
 
 /*
         robot.shooterMotor.setPower(-0.5);
