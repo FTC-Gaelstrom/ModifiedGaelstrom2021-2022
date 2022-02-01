@@ -26,7 +26,9 @@ public class MSJHardware {
         public DcMotor spinnerMotor = null;
 
         public ColorSensor colorSensor;
+
         public Servo dropperServo = null;
+        public Servo armServo = null;
 
 
         //Create Shooter Motor
@@ -68,6 +70,7 @@ public class MSJHardware {
 
             spinnerMotor = hwMap.get(DcMotor.class, "spinnerMotor");
             dropperServo = hwMap.get(Servo.class,"dropperServo");
+            armServo = hwMap.get(Servo.class,"armServo");
 
        /*     //Connect Shooter Motor
             shooterMotor = hwMap.get(DcMotor.class,"shooterMotor");
@@ -93,6 +96,7 @@ public class MSJHardware {
             backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
 
             spinnerMotor.setDirection(DcMotor.Direction.FORWARD);
+
 /*
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
 
