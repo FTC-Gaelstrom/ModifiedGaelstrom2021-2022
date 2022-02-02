@@ -51,6 +51,7 @@ public class RedOutside1 extends LinearOpMode {
     static final double DRIVE_SPEED = 0.5;
     static final double TURN_SPEED = 0.25;
     public double duckDistance = 3;
+    public int armHeight = 1200;
     public double sHubDistance = 15;
     //  @Override
     NormalizedColorSensor colorSensor;
@@ -147,6 +148,7 @@ public class RedOutside1 extends LinearOpMode {
         if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
             duckDistance = 2; //Then the duck is at location 1
             sHubDistance = 22;
+            armHeight = 800;
         }
         else {
             //Drive forward to location 2
@@ -158,6 +160,7 @@ public class RedOutside1 extends LinearOpMode {
             if (robot.colorSensor.red()>15 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>15) {// If there is yellow present at location 2
                 duckDistance = 2.5; //Then the duck is at location 2
                 sHubDistance = 17;
+                armHeight = 1100;
             }
 
         }
@@ -167,7 +170,8 @@ public class RedOutside1 extends LinearOpMode {
         //Strafe right away from duck
         encoderStrafe(DRIVE_SPEED, 8, -8, 5.0);
         //drive paralell to the shub
-        encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
+        encoderArmDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
+
         //turn towards the shub
         encoderDrive(TURN_SPEED, -9.5,9.5,5);
         //Back away correct distance from shipping hub
@@ -183,8 +187,7 @@ public class RedOutside1 extends LinearOpMode {
             telemetry.update();
             idle();
         }
-        robot.armMotor.setPower(0);
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
 
         //Put down arm
@@ -407,6 +410,101 @@ public class RedOutside1 extends LinearOpMode {
             robot.backRightMotor.setTargetPosition(newRightTarget);
             //testing computer at school
         }
+
+    }
+    public void encoderArmDrive(double speed,
+                              double leftInches, double rightInches,
+                              double timeoutS) {
+
+        robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        int newLeftTarget;
+        int newRightTarget;
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            newLeftTarget = robot.frontLeftMotor.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newRightTarget = robot.frontRightMotor.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+
+            robot.frontLeftMotor.setTargetPosition(newLeftTarget);
+            robot.frontRightMotor.setTargetPosition(newRightTarget);
+            robot.backLeftMotor.setTargetPosition(newLeftTarget);
+            robot.backRightMotor.setTargetPosition(newRightTarget);
+
+            // Turn On RUN_TO_POSITION
+            robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            robot.frontLeftMotor.setPower(Math.abs(speed));
+            robot.frontRightMotor.setPower(Math.abs(speed));
+            robot.backLeftMotor.setPower(Math.abs(speed));
+            robot.backRightMotor.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+            // its target position, the motion will stop.  This is "safer" in the event that the robot will
+            // always end the motion as soon as possible.
+            // However, if you require that BOTH motors have finished their moves before the robot continues
+            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.frontLeftMotor.isBusy() && robot.frontRightMotor.isBusy())) {
+                //Lift
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(armHeight);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(0.3);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                // Display it for the driver.
+                telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
+                telemetry.addData("Path2", "Running at %7d :%7d",
+                        robot.frontLeftMotor.getCurrentPosition(),
+                        robot.frontRightMotor.getCurrentPosition(),
+                        robot.backLeftMotor.getCurrentPosition(),
+                        robot.backRightMotor.getCurrentPosition());
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            robot.frontLeftMotor.setPower(0);
+            robot.frontRightMotor.setPower(0);
+            robot.backLeftMotor.setPower(0);
+            robot.backRightMotor.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            sleep(250);   // optional pause after each move
+
+            robot.frontLeftMotor.setTargetPosition(newLeftTarget);
+            robot.frontRightMotor.setTargetPosition(newRightTarget);
+            robot.backLeftMotor.setTargetPosition(newLeftTarget);
+            robot.backRightMotor.setTargetPosition(newRightTarget);
+            //testing computer at school
+        }
+
+    }
 
     }
 }
