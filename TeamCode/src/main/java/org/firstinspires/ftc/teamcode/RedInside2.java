@@ -117,8 +117,10 @@ public class RedInside2 extends LinearOpMode {
         encoderDrive((DRIVE_SPEED-.25), 18, 18, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
+        //strafe
+        encoderStrafe((DRIVE_SPEED -.25), -2, 2, 5);
         //turn to shub
-        encoderDrive((TURN_SPEED-.25),-9.5,9.5,5);
+        encoderDrive((TURN_SPEED -.25),-9.5,9.5,5);
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

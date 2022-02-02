@@ -160,5 +160,6 @@ public class MSJHardware {
             intakeMotor.setPower(0);
 
             dropperServo.setPosition(0.3);
+            armServo.setPosition(0);
     }
 }

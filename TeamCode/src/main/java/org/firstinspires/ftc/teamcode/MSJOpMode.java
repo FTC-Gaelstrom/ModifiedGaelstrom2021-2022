@@ -57,6 +57,7 @@ public class MSJOpMode extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
+    int armServoCounter=1;
 
     @Override
     public void runOpMode() {
@@ -90,6 +91,7 @@ public class MSJOpMode extends LinearOpMode {
             double frontLeftPower;
             double backRightPower;
             double backLeftPower;
+
 
            // double armPower;
 
@@ -133,6 +135,7 @@ public class MSJOpMode extends LinearOpMode {
             frontLeftPower    = Range.clip(y+x+rx, -.8, .8);
             backRightPower    = Range.clip(y+x-rx,-.8,.8);
             backLeftPower     = Range.clip(y-x+rx,-.8,.8);
+
            // liftPower    = Range.clip(lift,-1.0,1.0);
            // armPower = Range.clip(armup-armdown,-.5,.5);
 
@@ -210,7 +213,7 @@ public class MSJOpMode extends LinearOpMode {
                 robot.backLeftMotor.setPower(0);
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(750);
+                robot.armMotor.setTargetPosition(610);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -225,7 +228,7 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad2.left_bumper) {
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(755);
+                robot.armMotor.setTargetPosition(615);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 robot.frontRightMotor.setPower(frontRightPower);
@@ -252,7 +255,24 @@ public class MSJOpMode extends LinearOpMode {
 
             if(gamepad2.dpad_right) {
                 robot.spinnerMotor.setPower(0);
+
             }
+
+            // armServo command
+
+
+            if (gamepad2.dpad_left) {
+                if (armServoCounter%2 != 0) {
+                    robot.armServo.setPosition(.4);
+                    armServoCounter += 1;
+                }
+                else {
+                    robot.armServo.setPosition(0);
+                    armServoCounter += 1;
+                }
+
+            }
+
             /*
             if(gamepad2.y){
                 robot.loaderServo.setPower(-0.5);
