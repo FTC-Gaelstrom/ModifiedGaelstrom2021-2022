@@ -117,17 +117,7 @@ public class RedOutside1 extends LinearOpMode {
         //drop intake system
         robot.dropperServo.setPosition(.74);
         //Strafe left to carousel
-
-
-
-        //adjust strafe distance below
         encoderStrafe((DRIVE_SPEED - .25), -8.2, 8.2, 5.0);
-
-
-
-
-
-
         //Spin carousel
         robot.spinnerMotor.setPower(- .3);
         sleep(2200);
@@ -148,7 +138,7 @@ public class RedOutside1 extends LinearOpMode {
         if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
             duckDistance = 2; //Then the duck is at location 1
             sHubDistance = 22;
-            armHeight = 800;
+            armHeight = 700;
         }
         else {
             //Drive forward to location 2
@@ -168,28 +158,9 @@ public class RedOutside1 extends LinearOpMode {
         //back away from the duck
         encoderDrive(DRIVE_SPEED, -2,-2,5);
         //Strafe right away from duck
-        encoderStrafe(DRIVE_SPEED, 8, -8, 5.0);
+        encoderStrafe(DRIVE_SPEED, -8, 8, 5.0);
         //drive paralell to the shub
         encoderArmDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
-
-        //turn towards the shub
-        encoderDrive(TURN_SPEED, -9.5,9.5,5);
-        //Back away correct distance from shipping hub
-        encoderDrive(DRIVE_SPEED, - 2, - 2, 5.0);
-        //Lift
-        robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
-        robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.armMotor.setTargetPosition(750);
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armMotor.setPower(0.25);
-        while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
-            telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
-            telemetry.update();
-            idle();
-        }
-
-
-
         //Put down arm
         robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -205,10 +176,8 @@ public class RedOutside1 extends LinearOpMode {
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        //turn away from shub
-        encoderDrive(TURN_SPEED,-9,9,5);
-        //Drive to park
-        encoderDrive(DRIVE_SPEED,21,21,5);
+        //Drive backwards to park
+        encoderDrive(DRIVE_SPEED,-21,-21,5);
         //Strafe right
         encoderStrafe(DRIVE_SPEED,5,-5,5);
 
