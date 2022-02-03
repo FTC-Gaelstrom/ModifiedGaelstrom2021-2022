@@ -78,7 +78,7 @@ public class RedInside2 extends LinearOpMode {
         robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-
+        robot.armServo.setPosition(0.4);
 
 
         // Send telemetry message to indicate successful Encoder reset
@@ -117,8 +117,6 @@ public class RedInside2 extends LinearOpMode {
         encoderDrive((DRIVE_SPEED-.25), 18, 18, 4.0);
         //drop intake system
         robot.dropperServo.setPosition(.74);
-        //strafe
-        encoderStrafe((DRIVE_SPEED -.25), -2, 2, 5);
         //turn to shub
         encoderDrive((TURN_SPEED -.25),-9.5,9.5,5);
         //Lift
@@ -132,10 +130,9 @@ public class RedInside2 extends LinearOpMode {
             telemetry.update();
             idle();
         }
-        robot.armMotor.setPower(0);
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        sleep(500);
+        robot.armServo.setPosition(0.4);
+        sleep(1000);
 
         //Put down arm
         robot.armMotor.setDirection(DcMotor.Direction.FORWARD);

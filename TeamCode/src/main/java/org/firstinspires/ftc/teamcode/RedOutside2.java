@@ -117,7 +117,7 @@ public class RedOutside2 extends LinearOpMode {
         //drop intake system
         robot.dropperServo.setPosition(.74);
         //Strafe left to carousel
-        encoderStrafe((DRIVE_SPEED - .25), -8.5, 8.5, 5.0);
+        encoderStrafe((DRIVE_SPEED - .25), -8.6, 8.6, 5.0);
         //Spin carousel
         robot.spinnerMotor.setPower(- .27);
         sleep(4000);
@@ -167,7 +167,7 @@ public class RedOutside2 extends LinearOpMode {
         //Drive to park
         encoderDrive((DRIVE_SPEED -.25),-12,-12,5);
         //Strafe right
-        encoderStrafe(DRIVE_SPEED,7,-7,5);
+        encoderStrafe(DRIVE_SPEED,6.00,-6.00,5);
 
 
 

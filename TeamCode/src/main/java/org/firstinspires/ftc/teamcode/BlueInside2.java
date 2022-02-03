@@ -90,6 +90,8 @@ public class BlueInside2 extends LinearOpMode {
         );
         telemetry.update();
 
+        robot.armServo.setPosition(0.4);
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
@@ -118,9 +120,9 @@ public class BlueInside2 extends LinearOpMode {
         //drop intake system
         robot.dropperServo.setPosition(.74);
         //strafe
-        encoderStrafe((DRIVE_SPEED -.25), 2, -2, 5);
+        encoderStrafe((DRIVE_SPEED -.25), -2, 2, 5.0);
         //turn towards sHub
-        encoderDrive(TURN_SPEED,9.5,-9.5,5);
+        encoderDrive((TURN_SPEED -.25),9.5,-9.5,5);
         //Lift
         robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -135,11 +137,11 @@ public class BlueInside2 extends LinearOpMode {
         robot.armMotor.setPower(0);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        sleep(500);
+
 
         //release the cube
-        robot.armServo.setPosition(.4);
-
+        robot.armServo.setPosition(0.0);
+        sleep(1000);
         //Put down arm
         robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -158,9 +160,9 @@ public class BlueInside2 extends LinearOpMode {
         //
 
         //strafe left towards cargo
-        encoderStrafe((DRIVE_SPEED -.25),18,-18,5);
+        encoderStrafe((DRIVE_SPEED -.25),12.00,-12.00,5);
         //back into cargo
-        encoderDrive(DRIVE_SPEED,-18,-18,5);
+        encoderDrive(DRIVE_SPEED,-20,-20,5);
 
 /*
         robot.shooterMotor.setPower(-0.5);

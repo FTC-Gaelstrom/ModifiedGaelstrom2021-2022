@@ -91,6 +91,7 @@ public class BlueOutside2 extends LinearOpMode {
                         robot.backRightMotor.getCurrentPosition()
                         );
                         telemetry.update();
+                        robot.armServo.setPosition(0.4);
 
                         // Wait for the game to start (driver presses PLAY)
                         waitForStart();
@@ -145,10 +146,8 @@ public class BlueOutside2 extends LinearOpMode {
                     telemetry.update();
                     idle();
                 }
-                robot.armMotor.setPower(0);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                sleep(500);
+                robot.armServo.setPosition(0.0);
+                sleep(1000);
 
                 //Put down arm
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -420,7 +419,6 @@ public void encoderStrafe(double speed,
         robot.backRightMotor.setTargetPosition(newRightTarget);
         //testing computer at school
         }
-        //Token:
-        //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
+
         }
 }
