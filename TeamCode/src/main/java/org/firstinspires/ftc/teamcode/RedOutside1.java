@@ -173,17 +173,6 @@ public class RedOutside1 extends LinearOpMode {
         encoderStrafe(DRIVE_SPEED,8,-8,5);
 
 
-
-
-
-
-
-
-
-        //  robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-        //robot.rightClaw.setPosition(0.0);
-        //   sleep(1000);     // pause for servos to move
-
         telemetry.addData("Path", "Complete");
         telemetry.update();
 

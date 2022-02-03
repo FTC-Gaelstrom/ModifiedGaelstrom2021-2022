@@ -61,10 +61,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                     (WHEEL_DIAMETER_INCHES * 3.1415);
             static final double DRIVE_SPEED = 0.5;
             static final double TURN_SPEED = 0.25;
-            public double duckDistance = 6.75;
-            public double sHubDistance = 9;
-          //  @Override
-          NormalizedColorSensor colorSensor;
+            public double duckDistance = 3;
+            public double sHubDistance = 26;
+            public int armHeight = 650;
+            //  @Override
+            NormalizedColorSensor colorSensor;
+
             public void runOpMode() {
 
                 /*
@@ -76,7 +78,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 // Send telemetry message to signify robot waiting;
                 telemetry.addData("Status", "Resetting Encoders");    //
                 telemetry.update();
-
 
 
                 robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -109,9 +110,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
 
-    telemetry.addData("Red:", robot.colorSensor.red());
+                telemetry.addData("Red:", robot.colorSensor.red());
                 telemetry.addData("Blue:", robot.colorSensor.blue());
-                telemetry.addData("Green:",robot.colorSensor.green());
+                telemetry.addData("Green:", robot.colorSensor.green());
 
                 /*
         robot.liftMotor.setTargetPosition(-6650);
@@ -137,109 +138,55 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                 //drive back into carousel
                 encoderDrive(DRIVE_SPEED, -1.75, -1.75, 5);
                 //Spin carousel
-                robot.spinnerMotor.setPower(.3);
-                sleep(2000);
+                robot.spinnerMotor.setPower(.27);
+                sleep(3000);
                 robot.spinnerMotor.setPower(0);
                 //Strafe right to location 1
-                encoderStrafe((DRIVE_SPEED -.25), 11, -11, 5.0);
+                encoderStrafe((DRIVE_SPEED - .25), 11, -11, 5.0);
                 //drive forward to duck
-                encoderDrive((DRIVE_SPEED-.25), 1.7,1.8,5);
+                encoderDrive((DRIVE_SPEED - .25), 1.7, 1.8, 5);
                 //Scan location 1
                 telemetry.addData("Red:", robot.colorSensor.red());
                 telemetry.addData("Blue:", robot.colorSensor.blue());
-                telemetry.addData("Green:",robot.colorSensor.green());
+                telemetry.addData("Green:", robot.colorSensor.green());
                 sleep(750);
-                if (robot.colorSensor.red()>25 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>25) {// If there is yellow present at location 1
+                if (robot.colorSensor.red() > 25 && robot.colorSensor.blue() > 18 && robot.colorSensor.green() > 25) {// If there is yellow present at location 1
                     duckDistance = 4.625; //Then the duck is at location 1
                     sHubDistance = 17;
-                }
-                else {
+                    armHeight = 1200;
+                } else {
                     //Drive forward to location 2
                     telemetry.addData("Red:", robot.colorSensor.red());
                     telemetry.addData("Blue:", robot.colorSensor.blue());
-                    telemetry.addData("Green:",robot.colorSensor.green());
-                    encoderDrive((DRIVE_SPEED-.25), 4, 4, 5.0);
+                    telemetry.addData("Green:", robot.colorSensor.green());
+                    encoderDrive((DRIVE_SPEED - .25), 4, 4, 5.0);
                     sleep(750);
-                    if (robot.colorSensor.red()>15 && robot.colorSensor.blue()>18 && robot.colorSensor.green()>15) {// If there is yellow present at location 2
+                    if (robot.colorSensor.red() > 15 && robot.colorSensor.blue() > 18 && robot.colorSensor.green() > 15) {// If there is yellow present at location 2
                         duckDistance = 6; //Then the duck is at location 2
                         sHubDistance = 13;
+                        armHeight = 1100;
                     }
 
                 }
 
                 //back away from the duck
-                encoderDrive(DRIVE_SPEED, -1,-1,5);
+                encoderDrive(DRIVE_SPEED, -0.75, -0.75, 5);
                 //Strafe left away from duck
-                encoderStrafe(DRIVE_SPEED, -7, 7, 5.0);
+                encoderStrafe(DRIVE_SPEED, 8, -8, 5.0);
                 //turn a little bit to be parallel
-                encoderDrive(TURN_SPEED,-0.5,0.5,5);
+                //encoderDrive(TURN_SPEED, -0.5, 0.5, 5);
                 //drive paralell to the shub
-                encoderDrive(DRIVE_SPEED, sHubDistance, sHubDistance, 5);
-                //turn towards the shub
-                encoderDrive(TURN_SPEED, 7,-7,5);
-                //Drive forward correct distance from shipping hub
-                encoderDrive((DRIVE_SPEED -.25), 6-duckDistance, 6-duckDistance, 5  );
-                //Lift
-                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
-                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(700);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.25);
-                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
-                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
-                    telemetry.update();
-                    idle();
-                }
-                robot.armMotor.setPower(0);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                sleep(500);
-
-                //Put down arm
+                encoderArmDrive(DRIVE_SPEED-.3, sHubDistance, sHubDistance, 5);
+                //Open armServo
+                robot.armServo.setPosition(0);
+                sleep(1000);
+                //Change arm direction
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
-                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(703);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                robot.armMotor.setPower(0.25);
-                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
-                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
-                    telemetry.update();
-                    idle();
-                }
-                robot.armMotor.setPower(0);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                //Drive back to parking while putting down arm
+                encoderArmDrive((DRIVE_SPEED -.3),-11,-11,5);
+                //Strafe right
+                encoderStrafe(DRIVE_SPEED,-8,8,5);
 
-                //Back away from sHub
-                encoderDrive(DRIVE_SPEED-.2,-3,-3,5);
-                //Turn towards storage unit (to park)
-                encoderDrive(TURN_SPEED, 11, -11, 5);
-                //Drive to park
-                encoderDrive((DRIVE_SPEED),17.75,17.75,5);
-                //strafe at end
-                encoderStrafe(DRIVE_SPEED+.2,-8,8,5);
-
-
-
-
-
-
-
-/*
-        robot.shooterMotor.setPower(-0.5);
-        sleep(750);
-        robot.shooterMotor.setPower(-1);
-        sleep(1000);
-        robot.loaderServo.setPower(-.5);
-        sleep(8000);
-        robot.shooterMotor.setPower(0);
-        robot.loaderServo.setPower(0);
-*/
-
-
-                //  robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-                //robot.rightClaw.setPosition(0.0);
-                //   sleep(1000);     // pause for servos to move
 
                 telemetry.addData("Path", "Complete");
                 telemetry.update();
@@ -426,10 +373,103 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
                     robot.backRightMotor.setTargetPosition(newRightTarget);
                     //testing computer at school
                 }
-                //Token:
-                //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
+
             }
 
+            public void encoderArmDrive(double speed,
+                                        double leftInches, double rightInches,
+                                        double timeoutS) {
+
+                robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                int newLeftTarget;
+                int newRightTarget;
+
+                // Ensure that the opmode is still active
+                if (opModeIsActive()) {
+
+                    // Determine new target position, and pass to motor controller
+                    newLeftTarget = robot.frontLeftMotor.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+                    newRightTarget = robot.frontRightMotor.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+
+                    robot.frontLeftMotor.setTargetPosition(newLeftTarget);
+                    robot.frontRightMotor.setTargetPosition(newRightTarget);
+                    robot.backLeftMotor.setTargetPosition(newLeftTarget);
+                    robot.backRightMotor.setTargetPosition(newRightTarget);
+
+                    // Turn On RUN_TO_POSITION
+                    robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                    // reset the timeout time and start motion.
+                    runtime.reset();
+                    robot.frontLeftMotor.setPower(Math.abs(speed));
+                    robot.frontRightMotor.setPower(Math.abs(speed));
+                    robot.backLeftMotor.setPower(Math.abs(speed));
+                    robot.backRightMotor.setPower(Math.abs(speed));
+
+                    // keep looping while we are still active, and there is time left, and both motors are running.
+                    // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+                    // its target position, the motion will stop.  This is "safer" in the event that the robot will
+                    // always end the motion as soon as possible.
+                    // However, if you require that BOTH motors have finished their moves before the robot continues
+                    // onto the next step, use (isBusy() || isBusy()) in the loop test.
+                    while (opModeIsActive() &&
+                            (runtime.seconds() < timeoutS) &&
+                            (robot.frontLeftMotor.isBusy() && robot.frontRightMotor.isBusy())) {
+                        //Lift
+                        robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                        robot.armMotor.setTargetPosition(armHeight);
+                        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        robot.armMotor.setPower(0.3);
+                        while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                            telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                            telemetry.update();
+                            idle();
+                            // Display it for the driver.
+                            telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
+                            telemetry.addData("Path2", "Running at %7d :%7d",
+                                    robot.frontLeftMotor.getCurrentPosition(),
+                                    robot.frontRightMotor.getCurrentPosition(),
+                                    robot.backLeftMotor.getCurrentPosition(),
+                                    robot.backRightMotor.getCurrentPosition());
+                            telemetry.update();
+                        }
+                        robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                        // Stop all motion;
+                        robot.frontLeftMotor.setPower(0);
+                        robot.frontRightMotor.setPower(0);
+                        robot.backLeftMotor.setPower(0);
+                        robot.backRightMotor.setPower(0);
+
+                        // Turn off RUN_TO_POSITION
+                        robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                        robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                        robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                        robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                        sleep(250);   // optional pause after each move
+
+                        robot.frontLeftMotor.setTargetPosition(newLeftTarget);
+                        robot.frontRightMotor.setTargetPosition(newRightTarget);
+                        robot.backLeftMotor.setTargetPosition(newLeftTarget);
+                        robot.backRightMotor.setTargetPosition(newRightTarget);
+                        //testing computer at school
+                    }
+
+                }
+            }
         }
+
 
 
