@@ -57,7 +57,7 @@ public class MSJOpMode extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    int armServoCounter=1;
+    int armHeight=700;
 
     @Override
     public void runOpMode() {
@@ -205,15 +205,34 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad2.a){
                 robot.intakeMotor.setPower(0.0);
             }
-
+            //Lift to top level
             if(gamepad1.right_bumper) {
+                armHeight=700;
                 robot.frontRightMotor.setPower(0);
                 robot.frontLeftMotor.setPower(0);
                 robot.backRightMotor.setPower(0);
                 robot.backLeftMotor.setPower(0);
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(700);
+                robot.armMotor.setTargetPosition(armHeight);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(0.25);
+                while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
+                    telemetry.addData("encoder-armMotor", robot.armMotor.getCurrentPosition());
+                    telemetry.update();
+                    idle();
+                }
+            }
+            //Lift to bottom level
+            if(gamepad1.y){
+                armHeight=900;
+                robot.frontRightMotor.setPower(0);
+                robot.frontLeftMotor.setPower(0);
+                robot.backRightMotor.setPower(0);
+                robot.backLeftMotor.setPower(0);
+                robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
+                robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.armMotor.setTargetPosition(armHeight);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 while (opModeIsActive() && robot.armMotor.getCurrentPosition() < robot.armMotor.getTargetPosition()) {
@@ -226,7 +245,7 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad1.left_bumper) {
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(700);
+                robot.armMotor.setTargetPosition(armHeight-10);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 robot.frontRightMotor.setPower(frontRightPower);
@@ -255,6 +274,8 @@ public class MSJOpMode extends LinearOpMode {
                 robot.spinnerMotor.setPower(0);
 
             }
+
+
 
             // armServo command
             //Open armServo
