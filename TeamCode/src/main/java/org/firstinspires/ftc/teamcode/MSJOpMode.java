@@ -225,7 +225,7 @@ public class MSJOpMode extends LinearOpMode {
             }
             //Lift to bottom level
             if(gamepad1.y){
-                armHeight=900;
+                armHeight=1000;
                 robot.frontRightMotor.setPower(0);
                 robot.frontLeftMotor.setPower(0);
                 robot.backRightMotor.setPower(0);
@@ -245,7 +245,7 @@ public class MSJOpMode extends LinearOpMode {
             if(gamepad1.left_bumper) {
                 robot.armMotor.setDirection(DcMotor.Direction.FORWARD);
                 robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.armMotor.setTargetPosition(armHeight-10);
+                robot.armMotor.setTargetPosition(armHeight-30);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(0.25);
                 robot.frontRightMotor.setPower(frontRightPower);

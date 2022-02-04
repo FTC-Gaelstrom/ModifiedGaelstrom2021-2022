@@ -118,23 +118,23 @@ public class BlueOutside2 extends LinearOpMode {
         robot.liftMotor.setPower(0);
 */
                         // Drive forwards to get off wall
-                        encoderDrive(DRIVE_SPEED, 2, 2, 4.0);
+                        encoderDrive(DRIVE_SPEED, 2.00, 2.00, 4.0);
                         //drop intake system
                         robot.dropperServo.setPosition(.74);
                         //Strafe right to carousel
-                        encoderStrafe((DRIVE_SPEED - .25), 6, -6, 5.0);
+                        encoderStrafe((DRIVE_SPEED - .25), 6.50, -6.50, 5.0);
                         //turn towards carousel
-                        encoderDrive(TURN_SPEED, -9, 9, 5);
+                        encoderDrive(TURN_SPEED, -9.50, 9.50, 5);
                         //drive back into carousel
                         encoderDrive(DRIVE_SPEED, -1.8, -1.8, 5);
                         //Spin carousel
-                        robot.spinnerMotor.setPower(.3);
-                        sleep(2000);
+                        robot.spinnerMotor.setPower(.27);
+                        sleep(4000);
                         robot.spinnerMotor.setPower(0);
                         //Strafe right towards sHub
-                        encoderStrafe(DRIVE_SPEED,16,-16,5);
+                        encoderStrafe(DRIVE_SPEED,20.00,-20.00,5);
                         //Drive directly at sHub
-                        encoderDrive(DRIVE_SPEED-.25,18,18,5);
+                        encoderDrive(DRIVE_SPEED-.25,14.50,14.50,5);
                         //Lift arm
                     robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
                     robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -165,9 +165,9 @@ public class BlueOutside2 extends LinearOpMode {
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
 
                 //Back away from sHub
-                encoderDrive(DRIVE_SPEED-.2,-18,-18,5);
+                encoderDrive(DRIVE_SPEED-.2,-15.00,-15.00,5);
                 //strafe at end
-                encoderStrafe(DRIVE_SPEED,-6,6,5);
+                encoderStrafe(DRIVE_SPEED,-6.00,6.00,5);
 
                         /*
                         //Strafe right to location 1
