@@ -26,7 +26,7 @@ public class MSJHardware {
         //public DcMotor spinnerMotor = null;
 
         public Servo clawServo = null;
-       // public DcMotor extenderMotor = null;
+       public DcMotor extenderMotor = null;
 
        /* public ColorSensor colorSensor;
 
@@ -81,7 +81,7 @@ public class MSJHardware {
             armServo = hwMap.get(Servo.class,"armServo");
 
             */
-           // extenderMotor = hwMap.get(DcMotor.class, "extenderMotor");
+           extenderMotor = hwMap.get(DcMotor.class, "extenderMotor");
 
        /*     //Connect Shooter Motor
             shooterMotor = hwMap.get(DcMotor.class,"shooterMotor");
@@ -111,7 +111,7 @@ public class MSJHardware {
             //spinnerMotor.setDirection(DcMotor.Direction.FORWARD);
 
 
-           // extenderMotor.setDirection(DcMotor.Direction.FORWARD);
+           extenderMotor.setDirection(DcMotor.Direction.FORWARD);
 
 /*
             shooterMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -132,7 +132,7 @@ public class MSJHardware {
             //spinnerMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
-           // extenderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+           extenderMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             //liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //  liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -151,7 +151,7 @@ public class MSJHardware {
             //spinnerMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-           // extenderMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+           extenderMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 /*
             liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -169,10 +169,10 @@ public class MSJHardware {
             frontLeftMotor.setPower(0);
             backRightMotor.setPower(0);
             backLeftMotor.setPower(0);
-           // extenderMotor.setPower(0);
+           extenderMotor.setPower(0);
 
             //spinnerMotor.setPower(0);
-
+            clawServo.setPosition(0.65);
          /*
             shooterMotor.setPower(0);
             liftMotor.setPower(0);

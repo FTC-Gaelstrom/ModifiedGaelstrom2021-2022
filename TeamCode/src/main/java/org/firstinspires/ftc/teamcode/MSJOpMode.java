@@ -94,7 +94,7 @@ public class MSJOpMode extends LinearOpMode {
             double extenderMotorPower;
 
 
-           // double armPower;
+           //double armPower;
 
 
             // Choose to drive using either Tank Mode, or POV Mode
@@ -103,12 +103,12 @@ public class MSJOpMode extends LinearOpMode {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
   //          double shoot = gamepad2.left_stick_y;
-            double y = -gamepad1.left_stick_y;
-            double x  =  gamepad1.left_stick_x*1.5;
-            double rx = gamepad1.right_stick_x;
-    //        double lift = gamepad2.right_stick_y;
-      //      double armup = gamepad2.left_trigger;
-        //    double armdown = gamepad2.right_trigger;
+            double y = gamepad1.right_stick_x;
+            double x = gamepad1.left_stick_x;
+            double rx = -gamepad1.left_stick_y;
+            double lift = gamepad2.right_stick_y;
+            //double armup = gamepad2.left_trigger;
+            //double armdown = gamepad2.right_trigger;
 
 
             if(gamepad1.left_bumper){
@@ -132,11 +132,11 @@ public class MSJOpMode extends LinearOpMode {
 
 
            // shootPower    = Range.clip(shoot, -1.0, 1.0) ;
-            frontRightPower   = Range.clip(y - x-rx, -.8, .8);
-            frontLeftPower    = Range.clip(y+x+rx, -.8, .8);
-            backRightPower    = Range.clip(y+x-rx,-.8,.8);
-            backLeftPower     = Range.clip(y-x+rx,-.8,.8);
-
+            frontRightPower = Range.clip(y - x - rx, -1, 1);
+            frontLeftPower = Range.clip(y + x + rx, -1, 1);
+            backRightPower = Range.clip(y + x - rx, -1, 1);
+            backLeftPower = Range.clip(y - x + rx, -1, 1);
+            extenderMotorPower = Range.clip(lift, -1.0, 1.0);
            // liftPower    = Range.clip(lift,-1.0,1.0);
            // armPower = Range.clip(armup-armdown,-.5,.5);
 
@@ -201,15 +201,10 @@ public class MSJOpMode extends LinearOpMode {
             }
             */
 
-            int servoCounter = 2;
-            if(gamepad2.a){
-                if (servoCounter % 2 == 0) {
-                    robot.clawServo.setPosition(0.33);
-                }
-                else{
-                    robot.clawServo.setPosition(0 /*  :) */);
-                }
-            }
+            if(gamepad1.a)
+                robot.clawServo.setPosition(0.65);
+            if(gamepad2.b)
+                robot.clawServo.setPosition(0.26);
 
 
            /* if(gamepad2.right_bumper) {
@@ -251,7 +246,7 @@ public class MSJOpMode extends LinearOpMode {
                 robot.armMotor.setDirection(DcMotor.Direction.REVERSE);
             }
 */
-            /*if(gamepad2.dpad_up) {
+            if(gamepad2.dpad_up) {
                 robot.extenderMotor.setPower(-1);
             }
 
@@ -263,7 +258,7 @@ public class MSJOpMode extends LinearOpMode {
                 robot.extenderMotor.setPower(0);
 
             }
-*/
+
             // armServo command
 
 
@@ -301,6 +296,7 @@ public class MSJOpMode extends LinearOpMode {
             robot.frontLeftMotor.setPower(frontLeftPower);
             robot.backRightMotor.setPower(backRightPower);
             robot.backLeftMotor.setPower(backLeftPower);
+            robot.extenderMotor.setPower(extenderMotorPower);
 
            // robot.liftMotor.setPower(liftPower);
 
